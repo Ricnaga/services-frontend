@@ -47,7 +47,6 @@ fieldset{
 export const GymPlan = styled.div`
 display:flex;
 
-
   fieldset{
     margin:8px;
     padding:16px;

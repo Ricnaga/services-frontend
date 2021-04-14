@@ -1,17 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  HiOutlineUser,
-  HiOutlineDocument,
-  HiOutlineGlobe,
-  HiOutlineMail,
-} from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
-
-import Input from '../../components/Input';
 import api from '../../services/api';
+import FieldPlans from './FieldPlans';
+import InputFields from './InputFields';
+import PlanValue from '../../components/PlanValue';
 import {
-  Container, Form, GymPlan, Label,
+  Container, Form, GymPlan,
 } from './style';
 
 interface AllPlans {
@@ -27,6 +22,13 @@ interface FormData {
   services: AllPlans[];
 }
 
+interface EventProps {
+  target: {
+    name: string;
+    checked: boolean;
+  }
+}
+
 const SignUp: React.FC = () => {
   const [plan, setPlan] = useState<AllPlans[]>([]);
   const [paymentBasicValue, setPaymentBasicValue] = useState(0);
@@ -34,9 +36,8 @@ const SignUp: React.FC = () => {
   const [servicePackage, setServicePackage] = useState<AllPlans[]>([]);
 
   useEffect(() => {
-    api.get('/plans/show').then((response) => {
-      setPlan(response.data);
-    });
+    api.get('plans/show')
+      .then((response) => setPlan(response.data));
   }, []);
 
   const handleForm = useCallback(
@@ -51,94 +52,61 @@ const SignUp: React.FC = () => {
         services: servicePackage,
       };
 
-      await api.post('/users/signup', formValue);
+      await api.post('users/signup', formValue);
     },
     [servicePackage],
   );
 
-  const handleValue = useCallback(
-    (event) => {
-      if (event.target.name === 'Basic') {
-        if (event.target.checked) {
-          const newWorkout = {
-            workout: event.target.name,
-            servicePackage: 'Basic',
-          };
-          setServicePackage([...servicePackage, newWorkout]);
-          setPaymentBasicValue(paymentBasicValue + 80);
-        } else {
-          const service = servicePackage.filter(
-            (svc) => svc.workout !== event.target.name,
-          );
-          setServicePackage(service);
-          setPaymentBasicValue(paymentBasicValue - 80);
-        }
-      }
+  function handleValue(event: EventProps) {
+    const { name, checked } = event.target;
 
-      if (event.target.name !== 'Basic') {
-        if (event.target.checked) {
-          const newWorkout = {
-            workout: event.target.name,
-            servicePackage: 'Individual',
-          };
-          setServicePackage([...servicePackage, newWorkout]);
-          setPaymentIndividualValue(paymentIndividualValue + 120);
-        } else {
-          const service = servicePackage.filter(
-            (svc) => svc.workout !== event.target.name,
-          );
-          setServicePackage(service);
-          setPaymentIndividualValue(paymentIndividualValue - 120);
-        }
+    if (name === 'Basic') {
+      if (checked) {
+        setServicePackage([...servicePackage, {
+          workout: name,
+          servicePackage: 'Basic',
+        }]);
+        setPaymentBasicValue(80);
+      } else {
+        const onlyIndividual = servicePackage.filter(
+          (basic) => basic.workout !== name,
+        );
+        setServicePackage(onlyIndividual);
+        setPaymentBasicValue(0);
       }
-    },
-    [paymentBasicValue, paymentIndividualValue, servicePackage],
-  );
+    }
+
+    if (name !== 'Basic') {
+      if (checked) {
+        setServicePackage([...servicePackage, {
+          workout: name,
+          servicePackage: 'Individual',
+        }]);
+        setPaymentIndividualValue(paymentIndividualValue + 120);
+      } else {
+        const selectedPackage = servicePackage.filter(
+          (service) => service.workout !== name,
+        );
+        setServicePackage(selectedPackage);
+        setPaymentIndividualValue(paymentIndividualValue - 120);
+      }
+    }
+  }
 
   return (
     <>
       <Container>
         <h2>Cadastro de cliente</h2>
         <Form onSubmit={handleForm}>
-          <Input name="name" icon={HiOutlineUser} placeholder="Nome" />
-          <Input name="rg" icon={HiOutlineDocument} placeholder="RG" />
-          <Input name="address" icon={HiOutlineGlobe} placeholder="Endereço" />
-          <Input name="email" icon={HiOutlineMail} placeholder="E-mail" />
-          <GymPlan>
-            <fieldset>
-              <legend>
-                <Input name="Basic" onClick={handleValue} type="checkbox" />
-                Básico
-              </legend>
+          <InputFields />
 
-              {plan.map(
-                (modality) => modality.servicePackage === 'Basic' && (
-                  <Label key={modality.workout}>{modality.workout}</Label>
-                ),
-              )}
-            </fieldset>
-            <fieldset>
-              <legend>Individual</legend>
-              {plan.map(
-                (modality) => modality.servicePackage === 'Individual' && (
-                  <Label key={modality.workout}>
-                    <Input
-                      name={modality.workout}
-                      onClick={handleValue}
-                      type="checkbox"
-                    />
-                    {modality.workout}
-                  </Label>
-                ),
-              )}
-            </fieldset>
+          <GymPlan>
+            <FieldPlans name="Básico" setValues={handleValue} plan={plan} />
+            <FieldPlans name="Individual" setValues={handleValue} plan={plan} />
           </GymPlan>
-          <h4>
-            Valor do plano:R$
-            {paymentBasicValue + paymentIndividualValue > 120
-              ? paymentBasicValue + paymentIndividualValue * 0.6
-              : paymentBasicValue + paymentIndividualValue}
-          </h4>
+
+          <PlanValue basicValue={paymentBasicValue} individualValue={paymentIndividualValue} />
+
           <Button type="submit">Enviar</Button>
           <Link to="/">Voltar</Link>
         </Form>
