@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import api from '../../services/api';
+import RemoveWorkout from './RemoveWorkout';
 import {
-  Container,
+  AddField, AllFields, Container,
   Form,
-  AllFields,
-  AddField,
+
   RemoveField,
 } from './style';
 
-interface WorkoutRequest{
-  servicePackage:string;
-  workout:string;
+interface WorkoutRequest {
+  servicePackage: string;
+  workout: string;
 }
 
 const Workouts: React.FC = () => {
@@ -24,12 +24,13 @@ const Workouts: React.FC = () => {
 
   useEffect(() => {
     api.get('/plans/show').then((response) => {
-      const allWorkouts:WorkoutRequest[] = response.data;
-      const basic = allWorkouts.filter((workouts) => (workouts.servicePackage === 'Basic'
-        && workouts.workout)).map((workouts) => workouts.workout);
+      const basic = response.data
+        .filter((workouts: WorkoutRequest) => (workouts.servicePackage === 'Basic'
+        && workouts.workout)).map((workouts: WorkoutRequest) => workouts.workout);
 
-      const individual = allWorkouts.filter((workouts) => (workouts.servicePackage === 'Individual'
-        && workouts.workout)).map((workouts) => workouts.workout);
+      const individual = response.data
+        .filter((workouts: WorkoutRequest) => (workouts.servicePackage === 'Individual'
+        && workouts.workout)).map((workouts: WorkoutRequest) => workouts.workout);
 
       setNewRemoveBasicWorkout(basic);
       setNewRemoveIndividualWorkout(individual);
@@ -57,23 +58,23 @@ const Workouts: React.FC = () => {
   }, [newRemoveBasicWorkout]);
 
   const handleRemoveIndividualWorkout = useCallback((removeItem) => {
-    const item = newRemoveIndividualWorkout.filter((basic) => basic !== removeItem);
+    const item = newRemoveIndividualWorkout.filter((individual) => individual !== removeItem);
     setNewRemoveIndividualWorkout(item);
   }, [newRemoveIndividualWorkout]);
 
   const handleCreateWorkout = useCallback(async (event) => {
-    const services:WorkoutRequest[] = [];
-    newRemoveBasicWorkout.map((workout) => services.push({
+    const updatedWorkouts: WorkoutRequest[] = [];
+    newRemoveBasicWorkout.map((workout) => updatedWorkouts.push({
       workout,
       servicePackage: 'Basic',
     }));
 
-    newRemoveIndividualWorkout.map((workout) => services.push({
+    newRemoveIndividualWorkout.map((workout) => updatedWorkouts.push({
       workout,
       servicePackage: 'Individual',
     }));
 
-    await api.put('/plans/update', { services });
+    await api.post('plans/create', updatedWorkouts);
   }, [newRemoveBasicWorkout, newRemoveIndividualWorkout]);
 
   return (
@@ -110,35 +111,16 @@ const Workouts: React.FC = () => {
             <RemoveField>
               <fieldset>
                 <legend>Remover</legend>
-                <fieldset>
-                  <legend>Básico</legend>
-
-                  <ul>
-                    {newRemoveBasicWorkout.map((removeValue) => (
-                      <li key={removeValue}>
-                        {removeValue}
-                        <Button type="button" onClick={() => handleRemoveBasicWorkout(removeValue)}>-</Button>
-                      </li>
-                    ))}
-
-                  </ul>
-
-                </fieldset>
-
-                <fieldset>
-                  <legend>Individual</legend>
-
-                  <ul>
-                    {newRemoveIndividualWorkout.map((removeValue) => (
-                      <li key={removeValue}>
-                        {removeValue}
-                        <Button type="button" onClick={() => handleRemoveIndividualWorkout(removeValue)}>-</Button>
-                      </li>
-                    ))}
-
-                  </ul>
-
-                </fieldset>
+                <RemoveWorkout
+                  title="Básico"
+                  workout={newRemoveBasicWorkout}
+                  removeWorkoutName={handleRemoveBasicWorkout}
+                />
+                <RemoveWorkout
+                  title="Individual"
+                  workout={newRemoveIndividualWorkout}
+                  removeWorkoutName={handleRemoveIndividualWorkout}
+                />
 
               </fieldset>
             </RemoveField>
