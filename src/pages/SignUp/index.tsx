@@ -19,7 +19,7 @@ interface FormData {
   rg: string;
   address: string;
   email: string;
-  services: AllPlans[];
+  userPlan: AllPlans[];
 }
 
 interface EventProps {
@@ -37,7 +37,7 @@ const SignUp: React.FC = () => {
 
   useEffect(() => {
     api.get('plans/show')
-      .then((response) => setPlan(response.data));
+      .then((response) => setPlan(response.data.plans));
   }, []);
 
   const handleForm = useCallback(
@@ -49,10 +49,10 @@ const SignUp: React.FC = () => {
         rg: event.target[1].value,
         address: event.target[2].value,
         email: event.target[3].value,
-        services: servicePackage,
+        userPlan: servicePackage,
       };
 
-      await api.post('users/signup', formValue);
+      await api.post('users/create', formValue);
     },
     [servicePackage],
   );

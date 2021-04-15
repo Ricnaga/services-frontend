@@ -24,11 +24,11 @@ const Workouts: React.FC = () => {
 
   useEffect(() => {
     api.get('/plans/show').then((response) => {
-      const basic = response.data
+      const basic = response.data.plans
         .filter((workouts: WorkoutRequest) => (workouts.servicePackage === 'Basic'
         && workouts.workout)).map((workouts: WorkoutRequest) => workouts.workout);
 
-      const individual = response.data
+      const individual = response.data.plans
         .filter((workouts: WorkoutRequest) => (workouts.servicePackage === 'Individual'
         && workouts.workout)).map((workouts: WorkoutRequest) => workouts.workout);
 
@@ -63,6 +63,7 @@ const Workouts: React.FC = () => {
   }, [newRemoveIndividualWorkout]);
 
   const handleCreateWorkout = useCallback(async (event) => {
+    event.preventDefault();
     const updatedWorkouts: WorkoutRequest[] = [];
     newRemoveBasicWorkout.map((workout) => updatedWorkouts.push({
       workout,
@@ -74,7 +75,7 @@ const Workouts: React.FC = () => {
       servicePackage: 'Individual',
     }));
 
-    await api.post('plans/create', updatedWorkouts);
+    await api.put('plans/update', updatedWorkouts);
   }, [newRemoveBasicWorkout, newRemoveIndividualWorkout]);
 
   return (
