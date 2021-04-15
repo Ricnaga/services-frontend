@@ -1,30 +1,26 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  HiOutlineDocumentReport,
-  HiOutlineUser,
-  HiOutlineDocument,
-  HiOutlineGlobe,
-  HiOutlineMail,
+  HiOutlineDocument, HiOutlineDocumentReport,
+  HiOutlineGlobe, HiOutlineMail, HiOutlineUser,
 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
-
 import Input from '../../components/Input';
+import PlanValue from '../../components/PlanValue';
 import api from '../../services/api';
 import {
   Container,
-  SearchContent,
   Form,
   GymPlan,
-  Label,
+  Label, SearchContent,
 } from './style';
 
-interface AllPlans{
-  workout:string;
-  servicePackage:string;
+interface AllPlans {
+  workout: string;
+  servicePackage: string;
 }
 
-interface UserResponse{
+interface UserResponse {
   id: string;
   name: string;
   rg: string;
@@ -39,7 +35,7 @@ interface FormData {
   rg: string;
   address: string;
   email: string;
-  services: AllPlans[];
+  userPlan: AllPlans[];
   account: boolean;
 }
 
@@ -56,8 +52,8 @@ const ChangeData: React.FC = () => {
   const [servicePackage, setServicePackage] = useState<AllPlans[]>([]);
 
   useEffect(() => {
-    api.get('/plans/show').then((response) => {
-      setPlan(response.data);
+    api.get('plans/show').then((response) => {
+      setPlan(response.data.plans);
     });
   }, []);
 
@@ -65,33 +61,26 @@ const ChangeData: React.FC = () => {
     setnewUser(undefined);
     setUserAccount(false);
 
-    const userResponse = await api.put('/users/search-id', { id: newInput });
+    const foundUser = await api.put('users/find', newInput);
 
-    if (!userResponse.data.searchUser) {
+    if (!foundUser.data[0]) {
       setUserFound('Usuário não encontrado');
     } else {
-      setnewUser(userResponse.data.searchUser);
-      const plans:AllPlans[] = userResponse.data.searchUserPlan;
-      plans.filter((basicPlan) => basicPlan.servicePackage === 'Basic' && setNewBasicCheckedInput(true));
+      setnewUser(foundUser.data[0]);
+      const { userPlan } = foundUser.data[0];
+      const userOnlyIndividualPlans: AllPlans[] = [];
 
-      const allIndividualPlans:AllPlans[] = [];
-      const userPlan: AllPlans[] = userResponse.data.searchUserPlan;
+      userPlan.filter((plans:AllPlans) => (plans.servicePackage === 'Basic'
+        ? setNewBasicCheckedInput(true)
+        : userOnlyIndividualPlans.push(plans)));
 
-      userPlan.filter((newIndividualPlan) => newIndividualPlan.servicePackage === 'Individual'
-      && allIndividualPlans.push({
-        workout: newIndividualPlan.workout,
-        servicePackage: newIndividualPlan.servicePackage,
-      }));
-
-      setIndividualPlan(allIndividualPlans);
+      setIndividualPlan(userOnlyIndividualPlans);
 
       if (!newBasicCheckedInput) {
-        const newWorkout = {
+        setServicePackage([...servicePackage, {
           workout: 'Basic',
           servicePackage: 'Basic',
-        };
-
-        setServicePackage([...servicePackage, newWorkout]);
+        }]);
         setPaymentBasicValue(paymentBasicValue + 80);
       } else {
         const service = servicePackage.filter((svc) => svc.workout !== 'Basic');
@@ -151,10 +140,10 @@ const ChangeData: React.FC = () => {
         rg: event.target[1].value,
         address: event.target[2].value,
         email: event.target[3].value,
-        services: servicePackage,
+        userPlan: servicePackage,
         account: userAccount,
       };
-      await api.put('/users/updateUser', formValue);
+      await api.put('/users/update', formValue);
     },
     [newInput, servicePackage, userAccount],
   );
@@ -177,10 +166,30 @@ const ChangeData: React.FC = () => {
         {newUser
           ? (
             <Form onSubmit={handleForm}>
-              <Input name="name" icon={HiOutlineUser} placeholder="Nome" defaultValue={newUser.name} />
-              <Input name="rg" icon={HiOutlineDocument} placeholder="RG" defaultValue={newUser.rg} />
-              <Input name="address" icon={HiOutlineGlobe} placeholder="Endereço" defaultValue={newUser.address} />
-              <Input name="email" icon={HiOutlineMail} placeholder="E-mail" defaultValue={newUser.email} />
+              <Input
+                name="name"
+                icon={HiOutlineUser}
+                placeholder="Nome"
+                defaultValue={newUser.name}
+              />
+              <Input
+                name="rg"
+                icon={HiOutlineDocument}
+                placeholder="RG"
+                defaultValue={newUser.rg}
+              />
+              <Input
+                name="address"
+                icon={HiOutlineGlobe}
+                placeholder="Endereço"
+                defaultValue={newUser.address}
+              />
+              <Input
+                name="email"
+                icon={HiOutlineMail}
+                placeholder="E-mail"
+                defaultValue={newUser.email}
+              />
               <GymPlan>
                 <fieldset>
                   <legend>
@@ -199,11 +208,11 @@ const ChangeData: React.FC = () => {
                   </legend>
                   {plan.map((modality) => (
                     modality.servicePackage === 'Basic'
-              && (
-                <Label key={modality.workout}>
-                  {modality.workout}
-                </Label>
-              )
+                    && (
+                      <Label key={modality.workout}>
+                        {modality.workout}
+                      </Label>
+                    )
                   ))}
                 </fieldset>
 
@@ -212,12 +221,12 @@ const ChangeData: React.FC = () => {
 
                   {plan.map((modality) => (
                     modality.servicePackage === 'Individual'
-              && (
-              <Label key={modality.workout}>
-                <Input name={modality.workout} onClick={handleValue} type="checkbox" />
-                {modality.workout}
-              </Label>
-              )))}
+                    && (
+                      <Label key={modality.workout}>
+                        <Input name={modality.workout} onClick={handleValue} type="checkbox" />
+                        {modality.workout}
+                      </Label>
+                    )))}
 
                 </fieldset>
               </GymPlan>
@@ -230,12 +239,7 @@ const ChangeData: React.FC = () => {
                 />
                 Conta ativa ?
               </Label>
-              <h4>
-                Valor do plano:R$
-                {(paymentBasicValue + paymentIndividualValue) > 120
-                  ? paymentBasicValue + (paymentIndividualValue * 0.6)
-                  : paymentBasicValue + paymentIndividualValue}
-              </h4>
+              <PlanValue basicValue={paymentBasicValue} individualValue={paymentIndividualValue} />
               <Button type="submit">Enviar</Button>
             </Form>
           ) : <h2>{userFound}</h2>}
