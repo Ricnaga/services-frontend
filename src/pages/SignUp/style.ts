@@ -42,6 +42,10 @@ fieldset{
       background-color:orangered;
     }
   }
+
+  button{
+    font-weight:bolder;
+  }
 `;
 
 export const GymPlan = styled.div`

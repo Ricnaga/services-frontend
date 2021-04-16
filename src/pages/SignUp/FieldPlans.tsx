@@ -3,7 +3,7 @@ import { Label } from './style';
 
 interface AllPlans {
   workout: string;
-  servicePackage: string;
+  servicePlan: string;
 }
 
 interface FieldPlansProps {
@@ -23,7 +23,7 @@ export default function FieldPlans({ name, setValues, plan }: FieldPlansProps) {
           </legend>
 
           {plan.map(
-            (modality) => modality.servicePackage === 'Basic' && (
+            (modality) => modality.servicePlan === 'Basic' && (
             <Label key={modality.workout}>{modality.workout}</Label>
             ),
           )}
@@ -32,7 +32,7 @@ export default function FieldPlans({ name, setValues, plan }: FieldPlansProps) {
         <>
           <legend>{name}</legend>
           {plan.map(
-            (modality) => modality.servicePackage === name && (
+            (modality) => modality.servicePlan === name && (
             <Label key={modality.workout}>
               <Input
                 name={modality.workout}

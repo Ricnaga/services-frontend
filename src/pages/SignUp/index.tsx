@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
+import PlanValue from '../../components/PlanValue';
 import api from '../../services/api';
 import FieldPlans from './FieldPlans';
 import InputFields from './InputFields';
-import PlanValue from '../../components/PlanValue';
 import {
   Container, Form, GymPlan,
 } from './style';
 
 interface AllPlans {
   workout: string;
-  servicePackage: string;
+  servicePlan: string;
 }
 
 interface FormData {
@@ -29,11 +29,11 @@ interface EventProps {
   }
 }
 
-const SignUp: React.FC = () => {
+export default function SignUp() {
   const [plan, setPlan] = useState<AllPlans[]>([]);
   const [paymentBasicValue, setPaymentBasicValue] = useState(0);
   const [paymentIndividualValue, setPaymentIndividualValue] = useState(0);
-  const [servicePackage, setServicePackage] = useState<AllPlans[]>([]);
+  const [servicePlan, setServicePlan] = useState<AllPlans[]>([]);
 
   useEffect(() => {
     api.get('plans/show')
@@ -49,49 +49,56 @@ const SignUp: React.FC = () => {
         rg: event.target[1].value,
         address: event.target[2].value,
         email: event.target[3].value,
-        userPlan: servicePackage,
+        userPlan: servicePlan,
       };
 
       await api.post('users/create', formValue);
     },
-    [servicePackage],
+    [servicePlan],
   );
 
-  function handleValue(event: EventProps) {
+  const handleValue = useCallback((event: EventProps) => {
     const { name, checked } = event.target;
 
     if (name === 'Basic') {
       if (checked) {
-        setServicePackage([...servicePackage, {
-          workout: name,
-          servicePackage: 'Basic',
-        }]);
+        const findBasicPlan = servicePlan.filter((service) => service.servicePlan === 'Basic');
+        const addedBasicPlan = plan.filter((p) => p.servicePlan === 'Basic');
         setPaymentBasicValue(80);
+
+        if (servicePlan.length && !findBasicPlan.length) {
+          setServicePlan([...servicePlan, ...addedBasicPlan]);
+        }
+
+        if (!servicePlan.length) {
+          setServicePlan(addedBasicPlan);
+        }
       } else {
-        const onlyIndividual = servicePackage.filter(
-          (basic) => basic.workout !== name,
-        );
-        setServicePackage(onlyIndividual);
+        const removedBasicPlan = servicePlan.filter((p) => p.servicePlan !== 'Basic');
+        setServicePlan(removedBasicPlan);
         setPaymentBasicValue(0);
       }
     }
 
     if (name !== 'Basic') {
       if (checked) {
-        setServicePackage([...servicePackage, {
-          workout: name,
-          servicePackage: 'Individual',
-        }]);
+        const findIndividualPlan = servicePlan.filter((service) => service.workout === name);
+        const addedIndividualPlan = plan.filter((p) => p.workout === name);
         setPaymentIndividualValue(paymentIndividualValue + 120);
+
+        if (servicePlan.length && !findIndividualPlan.length) {
+          setServicePlan([...servicePlan, ...addedIndividualPlan]);
+        }
+        if (!servicePlan.length) {
+          setServicePlan(addedIndividualPlan);
+        }
       } else {
-        const selectedPackage = servicePackage.filter(
-          (service) => service.workout !== name,
-        );
-        setServicePackage(selectedPackage);
+        const removedIndividualPlan = servicePlan.filter((p) => p.workout !== name);
+        setServicePlan(removedIndividualPlan);
         setPaymentIndividualValue(paymentIndividualValue - 120);
       }
     }
-  }
+  }, [paymentIndividualValue, plan, servicePlan]);
 
   return (
     <>
@@ -113,5 +120,4 @@ const SignUp: React.FC = () => {
       </Container>
     </>
   );
-};
-export default SignUp;
+}
