@@ -29,8 +29,8 @@ interface EventProps {
 
 export default function SignUp() {
   const [plan, setPlan] = useState<AllPlans[]>([]);
-  const [paymentBasicValue, setPaymentBasicValue] = useState(0);
-  const [paymentIndividualValue, setPaymentIndividualValue] = useState(0);
+  const [basicValue, setBasicValue] = useState(0);
+  const [individualValue, setIndividualValue] = useState(0);
   const [servicePlan, setServicePlan] = useState<AllPlans[]>([]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function SignUp() {
             service => service.servicePlan === 'Basic',
           );
           const addedBasicPlan = plan.filter(p => p.servicePlan === 'Basic');
-          setPaymentBasicValue(80);
+          setBasicValue(80);
 
           if (servicePlan.length && !findBasicPlan.length) {
             setServicePlan([...servicePlan, ...addedBasicPlan]);
@@ -78,7 +78,7 @@ export default function SignUp() {
             p => p.servicePlan !== 'Basic',
           );
           setServicePlan(removedBasicPlan);
-          setPaymentBasicValue(0);
+          setBasicValue(0);
         }
       }
 
@@ -88,7 +88,7 @@ export default function SignUp() {
             service => service.workout === name,
           );
           const addedIndividualPlan = plan.filter(p => p.workout === name);
-          setPaymentIndividualValue(paymentIndividualValue + 120);
+          setIndividualValue(individualValue + 120);
 
           if (servicePlan.length && !findIndividualPlan.length) {
             setServicePlan([...servicePlan, ...addedIndividualPlan]);
@@ -101,11 +101,11 @@ export default function SignUp() {
             p => p.workout !== name,
           );
           setServicePlan(removedIndividualPlan);
-          setPaymentIndividualValue(paymentIndividualValue - 120);
+          setIndividualValue(individualValue - 120);
         }
       }
     },
-    [paymentIndividualValue, plan, servicePlan],
+    [individualValue, plan, servicePlan],
   );
 
   return (
@@ -121,8 +121,8 @@ export default function SignUp() {
           </GymPlan>
 
           <PlanValue
-            basicValue={paymentBasicValue}
-            individualValue={paymentIndividualValue}
+            basicValue={basicValue}
+            individualValue={individualValue}
           />
 
           <Button type="submit">Enviar</Button>
