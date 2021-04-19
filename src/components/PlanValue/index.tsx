@@ -3,7 +3,10 @@ interface PlanValueProps {
   individualValue: number;
 }
 
-export default function PlanValue({ basicValue, individualValue }: PlanValueProps) {
+export default function PlanValue({
+  basicValue,
+  individualValue,
+}: PlanValueProps) {
   return (
     <h4>
       Valor do plano: R$

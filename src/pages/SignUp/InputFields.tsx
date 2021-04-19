@@ -1,7 +1,8 @@
 import {
   HiOutlineDocument,
   HiOutlineGlobe,
-  HiOutlineMail, HiOutlineUser,
+  HiOutlineMail,
+  HiOutlineUser,
 } from 'react-icons/hi';
 import Input from '../../components/Input';
 

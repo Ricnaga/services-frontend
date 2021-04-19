@@ -5,9 +5,7 @@ import PlanValue from '../../components/PlanValue';
 import api from '../../services/api';
 import FieldPlans from './FieldPlans';
 import InputFields from './InputFields';
-import {
-  Container, Form, GymPlan,
-} from './style';
+import { Container, Form, GymPlan } from './style';
 
 interface AllPlans {
   workout: string;
@@ -26,7 +24,7 @@ interface EventProps {
   target: {
     name: string;
     checked: boolean;
-  }
+  };
 }
 
 export default function SignUp() {
@@ -36,12 +34,11 @@ export default function SignUp() {
   const [servicePlan, setServicePlan] = useState<AllPlans[]>([]);
 
   useEffect(() => {
-    api.get('plans/show')
-      .then((response) => setPlan(response.data.plans));
+    api.get('plans/show').then(response => setPlan(response.data.plans));
   }, []);
 
   const handleForm = useCallback(
-    async (event) => {
+    async event => {
       event.preventDefault();
 
       const formValue: FormData = {
@@ -57,48 +54,59 @@ export default function SignUp() {
     [servicePlan],
   );
 
-  const handleValue = useCallback((event: EventProps) => {
-    const { name, checked } = event.target;
+  const handleValue = useCallback(
+    (event: EventProps) => {
+      const { name, checked } = event.target;
 
-    if (name === 'Basic') {
-      if (checked) {
-        const findBasicPlan = servicePlan.filter((service) => service.servicePlan === 'Basic');
-        const addedBasicPlan = plan.filter((p) => p.servicePlan === 'Basic');
-        setPaymentBasicValue(80);
+      if (name === 'Basic') {
+        if (checked) {
+          const findBasicPlan = servicePlan.filter(
+            service => service.servicePlan === 'Basic',
+          );
+          const addedBasicPlan = plan.filter(p => p.servicePlan === 'Basic');
+          setPaymentBasicValue(80);
 
-        if (servicePlan.length && !findBasicPlan.length) {
-          setServicePlan([...servicePlan, ...addedBasicPlan]);
+          if (servicePlan.length && !findBasicPlan.length) {
+            setServicePlan([...servicePlan, ...addedBasicPlan]);
+          }
+
+          if (!servicePlan.length) {
+            setServicePlan(addedBasicPlan);
+          }
+        } else {
+          const removedBasicPlan = servicePlan.filter(
+            p => p.servicePlan !== 'Basic',
+          );
+          setServicePlan(removedBasicPlan);
+          setPaymentBasicValue(0);
         }
-
-        if (!servicePlan.length) {
-          setServicePlan(addedBasicPlan);
-        }
-      } else {
-        const removedBasicPlan = servicePlan.filter((p) => p.servicePlan !== 'Basic');
-        setServicePlan(removedBasicPlan);
-        setPaymentBasicValue(0);
       }
-    }
 
-    if (name !== 'Basic') {
-      if (checked) {
-        const findIndividualPlan = servicePlan.filter((service) => service.workout === name);
-        const addedIndividualPlan = plan.filter((p) => p.workout === name);
-        setPaymentIndividualValue(paymentIndividualValue + 120);
+      if (name !== 'Basic') {
+        if (checked) {
+          const findIndividualPlan = servicePlan.filter(
+            service => service.workout === name,
+          );
+          const addedIndividualPlan = plan.filter(p => p.workout === name);
+          setPaymentIndividualValue(paymentIndividualValue + 120);
 
-        if (servicePlan.length && !findIndividualPlan.length) {
-          setServicePlan([...servicePlan, ...addedIndividualPlan]);
+          if (servicePlan.length && !findIndividualPlan.length) {
+            setServicePlan([...servicePlan, ...addedIndividualPlan]);
+          }
+          if (!servicePlan.length) {
+            setServicePlan(addedIndividualPlan);
+          }
+        } else {
+          const removedIndividualPlan = servicePlan.filter(
+            p => p.workout !== name,
+          );
+          setServicePlan(removedIndividualPlan);
+          setPaymentIndividualValue(paymentIndividualValue - 120);
         }
-        if (!servicePlan.length) {
-          setServicePlan(addedIndividualPlan);
-        }
-      } else {
-        const removedIndividualPlan = servicePlan.filter((p) => p.workout !== name);
-        setServicePlan(removedIndividualPlan);
-        setPaymentIndividualValue(paymentIndividualValue - 120);
       }
-    }
-  }, [paymentIndividualValue, plan, servicePlan]);
+    },
+    [paymentIndividualValue, plan, servicePlan],
+  );
 
   return (
     <>
@@ -112,7 +120,10 @@ export default function SignUp() {
             <FieldPlans name="Individual" setValues={handleValue} plan={plan} />
           </GymPlan>
 
-          <PlanValue basicValue={paymentBasicValue} individualValue={paymentIndividualValue} />
+          <PlanValue
+            basicValue={paymentBasicValue}
+            individualValue={paymentIndividualValue}
+          />
 
           <Button type="submit">Enviar</Button>
           <Link to="/">Voltar</Link>
