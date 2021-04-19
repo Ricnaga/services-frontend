@@ -4,8 +4,8 @@ import { v4 } from 'uuid';
 type Plan = {
   id: string;
   workout: string;
-  servicePackage: string;
-}
+  servicePlan: string;
+};
 
 type User = {
   id: string;
@@ -16,7 +16,7 @@ type User = {
   account: boolean;
   created_at: string;
   userPlan: Plan[];
-}
+};
 
 export function mirageServer() {
   const server = createServer({
@@ -26,24 +26,40 @@ export function mirageServer() {
     },
 
     seeds(repository) {
-      repository.create('plan', { id: v4(), workout: 'Musculação', servicePackage: 'Basic' });
-      repository.create('plan', { id: v4(), workout: 'Zumba', servicePackage: 'Basic' });
-      repository.create('plan', { id: v4(), workout: 'Jiu jitsu', servicePackage: 'Individual' });
-      repository.create('plan', { id: v4(), workout: 'Balé', servicePackage: 'Individual' });
+      repository.create('plan', {
+        id: v4(),
+        workout: 'Musculação',
+        servicePlan: 'Basic',
+      });
+      repository.create('plan', {
+        id: v4(),
+        workout: 'Zumba',
+        servicePlan: 'Basic',
+      });
+      repository.create('plan', {
+        id: v4(),
+        workout: 'Jiu jitsu',
+        servicePlan: 'Individual',
+      });
+      repository.create('plan', {
+        id: v4(),
+        workout: 'Balé',
+        servicePlan: 'Individual',
+      });
     },
 
     routes() {
       this.namespace = 'api';
 
-      this.get('/plans/show', (schema) => schema.all('plan'));
+      this.get('/plans/show', schema => schema.all('plan'));
 
       this.put('/plans/update', (schema, request) => {
         const workoutsPackage = JSON.parse(request.requestBody);
         this.db.plans.remove();
 
         const createPlan = workoutsPackage.map(
-          (workout:Plan[]) => true
-          && schema.create('plan', { ...workout, id: v4() }),
+          (workout: Plan[]) =>
+            true && schema.create('plan', { ...workout, id: v4() }),
         );
 
         return createPlan;

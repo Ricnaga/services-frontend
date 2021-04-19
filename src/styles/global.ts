@@ -20,4 +20,8 @@ body{
   font-family:var(--custom-font);
   color:var(--text-border);
 }
+
+fieldset{
+  border-color:var(--text-border);
+}
 `;
