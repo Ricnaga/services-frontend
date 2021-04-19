@@ -1,16 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  HiOutlineDocument,
-  HiOutlineDocumentReport,
-  HiOutlineGlobe,
-  HiOutlineMail,
-  HiOutlineUser,
-} from 'react-icons/hi';
+import { HiOutlineDocumentReport } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import PlanValue from '../../components/PlanValue';
 import api from '../../services/api';
+import InputFields from './InputFields';
+import ListUserPlans from './ListUserPlans';
 import { Container, Form, GymPlan, Label, SearchContent } from './style';
 
 interface AllPlans {
@@ -176,81 +172,19 @@ export default function ChangeData() {
 
       {userFound ? (
         <Form onSubmit={handleForm}>
-          <Input
-            name="name"
-            icon={HiOutlineUser}
-            placeholder="Nome"
-            defaultValue={userFound.name}
+          <InputFields
+            name={userFound.name}
+            rg={userFound.rg}
+            address={userFound.address}
+            email={userFound.email}
           />
-          <Input
-            name="rg"
-            icon={HiOutlineDocument}
-            placeholder="RG"
-            defaultValue={userFound.rg}
+          <ListUserPlans
+            userBasicPlan={userBasicPlan}
+            setUserBasicPlan={setUserBasicPlan}
+            handleValue={handleValue}
+            plan={plan}
+            checkIndividualPlans={checkIndividualPlans}
           />
-          <Input
-            name="address"
-            icon={HiOutlineGlobe}
-            placeholder="Endereço"
-            defaultValue={userFound.address}
-          />
-          <Input
-            name="email"
-            icon={HiOutlineMail}
-            placeholder="E-mail"
-            defaultValue={userFound.email}
-          />
-          <GymPlan>
-            <fieldset>
-              <legend>
-                <Input
-                  name="Basic"
-                  type="checkbox"
-                  checked={userBasicPlan}
-                  onChange={e => setUserBasicPlan(e.target.checked)}
-                  onClick={handleValue}
-                />
-                Básico
-              </legend>
-              {plan.map(
-                basicPlan =>
-                  basicPlan.servicePlan === 'Basic' && (
-                    <Label key={basicPlan.workout}>{basicPlan.workout}</Label>
-                  ),
-              )}
-            </fieldset>
-
-            <fieldset>
-              <legend>Individual</legend>
-
-              {plan
-                .filter(
-                  individuaPlan => individuaPlan.servicePlan === 'Individual',
-                )
-                .map(p =>
-                  p.workout === checkIndividualPlans(p) ? (
-                    <Label key={p.workout}>
-                      <Input
-                        name={p.workout}
-                        type="checkbox"
-                        onClick={handleValue}
-                        defaultChecked
-                      />
-                      {p.workout}
-                    </Label>
-                  ) : (
-                    <Label key={p.workout}>
-                      <Input
-                        name={p.workout}
-                        type="checkbox"
-                        onClick={handleValue}
-                      />
-                      {p.workout}
-                    </Label>
-                  ),
-                )}
-            </fieldset>
-          </GymPlan>
           <Label>
             <Input
               name="account"
