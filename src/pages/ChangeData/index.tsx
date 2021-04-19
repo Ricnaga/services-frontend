@@ -30,6 +30,7 @@ interface UserResponse {
 
 export default function ChangeData() {
   const [plan, setPlan] = useState<AllPlans[]>([]);
+  const [initialUserPlan, setInitialUserPlan] = useState<AllPlans[]>([]);
   const [basicValue, setBasicValue] = useState(0);
   const [individualValue, setIndividualValue] = useState(0);
   const [servicePlan, setServicePlan] = useState<AllPlans[]>([]);
@@ -38,6 +39,7 @@ export default function ChangeData() {
   const [userIndividualPlan, setUserIndividualPlan] = useState([]);
   const [userNotFound, setUserNotFound] = useState('');
   const [userFound, setUserFound] = useState<UserResponse>();
+  const [userAccount, setUserAccount] = useState(false);
 
   useEffect(() => {
     api.get('plans/show').then(response => {
@@ -51,6 +53,7 @@ export default function ChangeData() {
     if (!findUser.data[0]) {
       setUserNotFound('Usuário não encontrado');
     } else {
+      setUserAccount(findUser.data[0].account);
       setUserFound(findUser.data[0]);
       const { userPlan } = findUser.data[0];
 
@@ -64,6 +67,7 @@ export default function ChangeData() {
 
       setUserIndividualPlan(findUserIndividualPlans);
       setIndividualValue(120 * findUserIndividualPlans.length);
+      setInitialUserPlan(userPlan);
     }
   }, [findUserInput]);
 
@@ -103,7 +107,7 @@ export default function ChangeData() {
         }
       }
 
-      if (name !== 'Basic') {
+      if (name !== 'Basic' && name !== 'account') {
         if (checked) {
           const findIndividualPlan = servicePlan.filter(
             service => service.workout === name,
@@ -125,15 +129,34 @@ export default function ChangeData() {
           setIndividualValue(individualValue - 120);
         }
       }
+
+      if (name === 'account') {
+        if (checked) {
+          setUserAccount(true);
+        } else {
+          setUserAccount(false);
+        }
+      }
     },
     [individualValue, plan, servicePlan],
   );
 
-  const handleForm = useCallback(async event => {
-    event.preventDefault();
-    // console.log(event.target[5].checked); - campo check do basic
-    console.log(event.target[6].elements[0].name);
-  }, []);
+  const handleForm = useCallback(
+    async event => {
+      event.preventDefault();
+
+      const formValue = {
+        id: findUserInput,
+        name: event.target[0].value,
+        rg: event.target[1].value,
+        address: event.target[2].value,
+        email: event.target[3].value,
+        account: userAccount,
+        userPlan: servicePlan.length === 0 ? initialUserPlan : servicePlan,
+      };
+    },
+    [findUserInput, initialUserPlan, servicePlan, userAccount],
+  );
 
   return (
     <Container>
@@ -230,7 +253,8 @@ export default function ChangeData() {
             <Input
               name="account"
               type="checkbox"
-              defaultChecked={userFound.account}
+              onClick={handleValue}
+              defaultChecked={userAccount}
             />
             Conta ativa ?
           </Label>
