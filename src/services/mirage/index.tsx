@@ -85,6 +85,12 @@ export function mirageServer() {
         return [findUser];
       });
 
+      this.put('/users/update', (schema, request) => {
+        const user = JSON.parse(request.requestBody);
+
+        return [schema.find('user', user.id)?.update(user)];
+      });
+
       this.passthrough();
     },
   });

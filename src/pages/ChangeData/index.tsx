@@ -145,7 +145,7 @@ export default function ChangeData() {
     async event => {
       event.preventDefault();
 
-      const formValue = {
+      const userForm = {
         id: findUserInput,
         name: event.target[0].value,
         rg: event.target[1].value,
@@ -154,6 +154,8 @@ export default function ChangeData() {
         account: userAccount,
         userPlan: servicePlan.length === 0 ? initialUserPlan : servicePlan,
       };
+
+      await api.put('/users/update', userForm);
     },
     [findUserInput, initialUserPlan, servicePlan, userAccount],
   );
