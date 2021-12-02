@@ -1,18 +1,17 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes';
-import { mirageServer } from './services/mirage';
-import GlobalStyle from './styles/global';
+import { Topbar } from './components/Topbar';
+import { RoutesPages } from './routes';
+import { mirageMockServer } from './services/mirage';
 
-mirageServer();
+mirageMockServer();
 
-const App: React.FC = () => (
-  <>
+export function App() {
+  return (
     <BrowserRouter>
-      <Routes />
+      <Topbar />
+      <RoutesPages />
     </BrowserRouter>
-
-    <GlobalStyle />
-  </>
-);
-export default App;
+  );
+}
