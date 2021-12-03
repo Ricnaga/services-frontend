@@ -36,7 +36,7 @@ export function CreateUsers() {
     <Container className="mt-4 d-flex justify-content-center">
       <Card>
         <Card.Body>
-          <Card.Title as="h3">Formulário</Card.Title>
+          <Card.Title as="h1">Cadastro de cliente</Card.Title>
           <CreateUserForm
             pacotes={pacotes}
             onPushNotification={handlePushNotification}

@@ -16,9 +16,9 @@ function ConfirmationModal({
   onPushNotification,
 }: ConfirmationModalProps) {
   const handleCloseModal = () => {
-    const { id, account, email, endereco, nome, rg } = user;
+    const { id, conta, email, endereco, nome, rg } = user;
     api
-      .patch(`/users/${id}`, { nome, rg, endereco, email, account })
+      .patch(`/users/${id}`, { nome, rg, endereco, email, conta })
       .then(responseId => {
         onModalClose();
         onHideOffCanvasClose();
@@ -32,6 +32,7 @@ function ConfirmationModal({
                 email: '',
                 rg: '',
                 endereco: '',
+                conta: false,
               },
             },
           })
@@ -85,6 +86,7 @@ function DeleteModal({
                 email: '',
                 rg: '',
                 endereco: '',
+                conta: false,
               },
             },
           })

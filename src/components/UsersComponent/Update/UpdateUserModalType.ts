@@ -4,7 +4,7 @@ export interface UsersFound {
   rg: string;
   endereco: string;
   email: string;
-  account: boolean;
+  conta: boolean;
   created_at: Date;
 }
 

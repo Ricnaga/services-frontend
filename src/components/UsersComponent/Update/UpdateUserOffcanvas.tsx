@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form as FormFormik, Formik, FormikValues } from 'formik';
+import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Button, Card } from 'react-bootstrap';
 import { FieldText } from '../../@common/Input/FieldText';
 import { UsersFound } from './UpdateUserModalType';
@@ -16,6 +16,7 @@ enum FormFields {
   email = 'email',
   rg = 'rg',
   endereco = 'endereco',
+  conta = 'conta',
 }
 
 export function UpdateUserOffcanvas({
@@ -29,11 +30,12 @@ export function UpdateUserOffcanvas({
     [FormFields.email]: user.email,
     [FormFields.rg]: user.rg,
     [FormFields.endereco]: user.endereco,
+    [FormFields.conta]: user.conta,
   };
 
   const onSubmit = (values: FormikValues) => {
-    const { nome, rg, email, endereco, account } = values;
-    const changeUser = { ...user, nome, rg, email, endereco, account };
+    const { nome, rg, email, endereco, conta } = values;
+    const changeUser = { ...user, nome, rg, email, endereco, conta };
     onChangeUser(changeUser);
   };
   return (
@@ -43,6 +45,12 @@ export function UpdateUserOffcanvas({
         <FieldText name={FormFields.email} title="email" />
         <FieldText name={FormFields.rg} title="rg" />
         <FieldText name={FormFields.endereco} title="endereco" />
+        Conta ativa ?
+        <Field
+          className="form-check-input mx-2"
+          name={FormFields.conta}
+          type="checkbox"
+        />
         <Card.Footer className="mt-3 d-flex justify-content-end">
           <Button
             type="submit"

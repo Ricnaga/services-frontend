@@ -1,8 +1,9 @@
 import React from 'react';
-import { Form as FormFormik, Formik, FormikValues } from 'formik';
+import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Card } from 'react-bootstrap';
 import { ButtonBootstrap } from '../../@common/Button';
 import { FieldText } from '../../@common/Input/FieldText';
+import { FieldCheckbox } from '../../@common/Input/FieldCheckbox';
 
 enum FormFields {
   id = 'id',
@@ -10,6 +11,7 @@ enum FormFields {
   email = 'email',
   rg = 'rg',
   endereco = 'endereco',
+  conta = 'conta',
 }
 
 interface FormCardProps {
@@ -22,6 +24,7 @@ export function UpdateUserForm({ onFindUser }: FormCardProps) {
     [FormFields.email]: '',
     [FormFields.rg]: '',
     [FormFields.endereco]: '',
+    [FormFields.conta]: false,
   };
   const onSubmit = (values: FormikValues) => onFindUser(values);
   return (
@@ -32,6 +35,12 @@ export function UpdateUserForm({ onFindUser }: FormCardProps) {
         <FieldText name={FormFields.email} title="email" />
         <FieldText name={FormFields.rg} title="rg" />
         <FieldText name={FormFields.endereco} title="endereco" />
+        Conta
+        <Field
+          className="form-check-input mx-2"
+          name={FormFields.conta}
+          type="checkbox"
+        />
         <Card.Footer className="mt-3 d-flex justify-content-end">
           <ButtonBootstrap title="Buscar" type="submit" />
         </Card.Footer>

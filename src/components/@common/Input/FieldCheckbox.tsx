@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 
 type FieldCheckboxProps = {
   name: string;
-  value: string;
+  value: string | boolean;
   title: string;
 };
 

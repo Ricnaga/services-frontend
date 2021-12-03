@@ -41,7 +41,7 @@ export function UpdateUserTable({
             <td>{usuario.rg}</td>
             <td>{usuario.email}</td>
             <td>{usuario.endereco}</td>
-            <td>{usuario.account === true ? 'sim' : 'não'}</td>
+            <td>{usuario.conta === true ? 'sim' : 'não'}</td>
             <td>
               <Button onClick={() => onOpenOffCanvas(usuario)}>
                 <ChangeIcon />

@@ -14,7 +14,7 @@ type User = {
   rg: string;
   endereco: string;
   email: string;
-  account: boolean;
+  conta: boolean;
   created_at: Date;
 };
 
@@ -63,7 +63,7 @@ export function mirageMockServer() {
         rg: '123456789',
         endereco: 'Rua teste de Fulano',
         email: 'fulano@email.com',
-        account: true,
+        conta: true,
         created_at: new Date(),
       });
       repository.create('usuario', {
@@ -72,7 +72,7 @@ export function mirageMockServer() {
         rg: '987654321',
         endereco: 'Rua teste de Sicrano',
         email: 'sicrano@email.com',
-        account: true,
+        conta: true,
         created_at: new Date(),
       });
     },
@@ -98,7 +98,7 @@ export function mirageMockServer() {
           endereco,
           email,
           id: user_id,
-          account: true,
+          conta: true,
           created_at: new Date(),
         };
 
@@ -141,7 +141,7 @@ export function mirageMockServer() {
       });
 
       this.get('/users', (schema, request) => {
-        const { id, nome, email, rg, endereco } = JSON.parse(
+        const { id, nome, email, rg, endereco, conta } = JSON.parse(
           request.queryParams.values,
         );
 
@@ -163,7 +163,8 @@ export function mirageMockServer() {
               usuario.nome === nome ||
               usuario.email === email ||
               usuario.rg === rg ||
-              usuario.endereco === endereco,
+              usuario.endereco === endereco ||
+              usuario.conta === conta,
           );
       });
 

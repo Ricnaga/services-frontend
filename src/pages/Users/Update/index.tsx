@@ -24,8 +24,8 @@ export function UpdateUsers() {
   const [user, setUser] = useState<UsersFound | null>(null);
 
   const handleChangeUser = (usuario: FormikValues) => {
-    const { id, nome, rg, endereco, email, account, created_at } = usuario;
-    setUser({ id, nome, rg, endereco, email, account, created_at });
+    const { id, nome, rg, endereco, email, conta, created_at } = usuario;
+    setUser({ id, nome, rg, endereco, email, conta, created_at });
   };
   const handleOpenOffCanvas = (usuario: UsersFound) => {
     handleChangeUser(usuario);
@@ -75,7 +75,7 @@ export function UpdateUsers() {
       <Row>
         <Col>
           <Card>
-            <Card.Header as="h4">Informações do cliente</Card.Header>
+            <Card.Header as="h1">Alterar dados do cliente</Card.Header>
             <Card.Body className="px-4">
               <UpdateUserForm onFindUser={handleFindUser} />
             </Card.Body>

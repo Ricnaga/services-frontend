@@ -50,7 +50,7 @@ export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
         <Row>
           <Col>
             <Card>
-              <Card.Header as="h4">Informações do cliente</Card.Header>
+              <Card.Header as="h3">Informações do cliente</Card.Header>
               <Card.Body className="px-4">
                 <FieldText name={FormFields.nome} title="nome" />
                 <FieldText name={FormFields.email} title="email" />
@@ -62,7 +62,7 @@ export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
 
           <Col>
             <Card>
-              <Card.Header as="h4">Planos</Card.Header>
+              <Card.Header as="h3">Planos</Card.Header>
               <Row>
                 <Col>
                   <Card.Body>
