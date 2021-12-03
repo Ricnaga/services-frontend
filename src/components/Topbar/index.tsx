@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { LiveClock } from './clock';
 
 export function Topbar() {
@@ -10,13 +10,13 @@ export function Topbar() {
         <Navbar.Collapse>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/workouts">Pacotes</Nav.Link>
-            <NavDropdown title="Usuários">
+            <Nav.Link href="/workouts">Serviços</Nav.Link>
+            <NavDropdown title="Clientes">
               <NavDropdown.Item href="/create">Adicionar</NavDropdown.Item>
-              <NavDropdown.Item href="/update">Alterar</NavDropdown.Item>
+              <NavDropdown.Item href="/update">Alterar dados</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Nav>
+          <Nav variant="pills">
             <LiveClock />
             <Nav.Link href="/Ticket">Catraca</Nav.Link>
           </Nav>

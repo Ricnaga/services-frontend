@@ -3,96 +3,206 @@ import { v4 } from 'uuid';
 
 type Plan = {
   id: string;
-  workout: string;
-  servicePlan: string;
+  nome: string;
+  basico: boolean;
+  created_at: Date;
 };
 
 type User = {
   id: string;
-  name: string;
+  nome: string;
   rg: string;
-  address: string;
+  endereco: string;
   email: string;
   account: boolean;
-  created_at: string;
-  userPlan: Plan[];
+  created_at: Date;
 };
 
-export function mirageServer() {
+type UsersPlan = {
+  id: string;
+  user_id: string;
+  package_id: string;
+  created_at: Date;
+};
+
+export function mirageMockServer() {
   const server = createServer({
     models: {
-      plan: Model.extend<Partial<Plan>>({}),
-      user: Model.extend<Partial<User>>({}),
+      plano: Model.extend<Partial<Plan>>({}),
+      usuario: Model.extend<Partial<User>>({}),
+      planosUsuarios: Model.extend<Partial<UsersPlan>>({}),
     },
-
     seeds(repository) {
-      repository.create('plan', {
+      repository.create('plano', {
         id: v4(),
-        workout: 'Musculação',
-        servicePlan: 'Basic',
+        nome: 'Musculação',
+        basico: true,
+        created_at: new Date(),
       });
-      repository.create('plan', {
+      repository.create('plano', {
         id: v4(),
-        workout: 'Zumba',
-        servicePlan: 'Basic',
+        nome: 'Funcional',
+        basico: true,
+        created_at: new Date(),
       });
-      repository.create('plan', {
+      repository.create('plano', {
         id: v4(),
-        workout: 'Jiu jitsu',
-        servicePlan: 'Individual',
+        nome: 'Jiujitsu',
+        basico: false,
+        created_at: new Date(),
       });
-      repository.create('plan', {
+      repository.create('plano', {
         id: v4(),
-        workout: 'Balé',
-        servicePlan: 'Individual',
+        nome: 'Ballet',
+        basico: false,
+        created_at: new Date(),
+      });
+      repository.create('usuario', {
+        id: v4(),
+        nome: 'Fulano de tal',
+        rg: '123456789',
+        endereco: 'Rua teste de Fulano',
+        email: 'fulano@email.com',
+        account: true,
+        created_at: new Date(),
+      });
+      repository.create('usuario', {
+        id: v4(),
+        nome: 'Sicrano de tal',
+        rg: '987654321',
+        endereco: 'Rua teste de Sicrano',
+        email: 'sicrano@email.com',
+        account: true,
+        created_at: new Date(),
       });
     },
-
     routes() {
       this.namespace = 'api';
 
-      this.get('/plans/show', schema => schema.all('plan'));
-
-      this.put('/plans/update', (schema, request) => {
-        const workoutsPackage = JSON.parse(request.requestBody);
-        this.db.plans.remove();
-
-        const createPlan = workoutsPackage.map(
-          (workout: Plan[]) =>
-            true && schema.create('plan', { ...workout, id: v4() }),
-        );
-
-        return createPlan;
+      this.get('/plans', schema => {
+        const planos = schema.all('plano').models;
+        return {
+          planos,
+        };
       });
 
-      this.post('/users/create', (schema, request) => {
-        const getUser = JSON.parse(request.requestBody);
+      this.post('/users', (schema, request) => {
+        const { nome, rg, endereco, email, planos } = JSON.parse(
+          request.requestBody,
+        );
+        const user_id = v4();
 
-        const createUser = schema.create('user', {
-          ...getUser,
-          id: v4(),
+        const userData = {
+          nome,
+          rg,
+          endereco,
+          email,
+          id: user_id,
           account: true,
           created_at: new Date(),
-        });
+        };
 
-        return createUser;
+        const { id } = schema.create('usuario', userData);
+
+        const planosFormatados = schema
+          .where('plano', collection => collection)
+          .models.map(model => model.attrs);
+
+        if (planos.find((plan: string) => plan === 'basico') === 'basico') {
+          planosFormatados
+            .filter(plano => plano.basico)
+            .map(dados => {
+              return schema.create('planosUsuarios', {
+                id: v4(),
+                user_id,
+                package_id: dados.id,
+                created_at: new Date(),
+              });
+            });
+        }
+
+        planosFormatados
+          .filter(
+            plano =>
+              planos.find((plan: string) => plan === plano.nome) === plano.nome,
+          )
+          .map(dados => {
+            return schema.create('planosUsuarios', {
+              id: v4(),
+              user_id,
+              package_id: dados.id,
+              created_at: new Date(),
+            });
+          });
+
+        return {
+          id,
+        };
       });
 
-      this.put('/users/find', (schema, request) => {
-        const id = request.requestBody;
-        const findUser = schema.find('user', id)?.attrs;
+      this.get('/users', (schema, request) => {
+        const { id, nome, email, rg, endereco } = JSON.parse(
+          request.queryParams.values,
+        );
 
-        return [findUser];
+        if (
+          id === '' &&
+          nome === '' &&
+          email === '' &&
+          rg === '' &&
+          endereco === ''
+        )
+          return schema.where('usuario', collection => collection).models;
+
+        return schema
+          .where('usuario', collection => collection)
+          .models.map(model => model.attrs)
+          .filter(
+            usuario =>
+              usuario.id === id ||
+              usuario.nome === nome ||
+              usuario.email === email ||
+              usuario.rg === rg ||
+              usuario.endereco === endereco,
+          );
       });
 
-      this.put('/users/update', (schema, request) => {
-        const user = JSON.parse(request.requestBody);
+      this.patch('/users/:id', (schema, request) => {
+        const { id } = request.params;
+        const userData = JSON.parse(request.requestBody);
+        const findUser = schema.findBy('usuario', { id });
 
-        return [schema.find('user', user.id)?.update(user)];
+        if (findUser) {
+          findUser.update(userData);
+          return {
+            message: 'Dados alterados com sucesso!',
+          };
+        }
+
+        return {
+          message: 'Erro ao atualizar dados do usuário',
+        };
+      });
+
+      this.delete('/users/:id', (schema, request) => {
+        const { id } = request.params;
+        const findUser = schema.findBy('usuario', { id });
+
+        if (findUser) {
+          findUser.destroy();
+          return {
+            message: 'Dado apagado com sucesso',
+          };
+        }
+
+        return {
+          message: 'Erro ao apagar dados do usuário',
+        };
       });
 
       this.passthrough();
     },
   });
+
   return server;
 }

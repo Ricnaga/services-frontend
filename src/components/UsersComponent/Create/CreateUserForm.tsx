@@ -2,6 +2,7 @@ import { Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Button, Card, Col, Form, ListGroup, Row } from 'react-bootstrap';
 import { CreateUserProps } from '../../../pages/Users/Create';
 import api from '../../../services/api';
+import { ButtonBootstrap } from '../../@common/Button';
 import { FieldCheckbox } from '../../@common/Input/FieldCheckbox';
 import { FieldText } from '../../@common/Input/FieldText';
 import { LoadingCard } from '../../@common/Loading/LoadingCard';
@@ -22,7 +23,7 @@ enum FormFields {
   planos = 'planos',
 }
 
-export function FormCard({ pacotes, onPushNotification }: FormCardProps) {
+export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
   if (!pacotes) return <LoadingCard />;
 
   const initialValues = {
@@ -106,13 +107,10 @@ export function FormCard({ pacotes, onPushNotification }: FormCardProps) {
             </Card>
           </Col>
         </Row>
-        <Row>
-          <h3>Total: R$ 40,00</h3>
-        </Row>
 
-        <Button className="mt-3" variant="primary" type="submit">
-          Cadastrar
-        </Button>
+        <Card.Footer className="mt-3 d-flex justify-content-end">
+          <ButtonBootstrap title="Cadastrar" type="submit" />
+        </Card.Footer>
       </FormFormik>
     </Formik>
   );

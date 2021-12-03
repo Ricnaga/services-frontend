@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import { PushNotification } from '../../../components/@common/PushNotification';
-import { FormCard } from '../../../components/UsersComponent/Create/FormCard';
+import { CreateUserForm } from '../../../components/UsersComponent/Create/CreateUserForm';
 import api from '../../../services/api';
 
 export type CreateUserProps = {
@@ -37,7 +37,7 @@ export function CreateUsers() {
       <Card>
         <Card.Body>
           <Card.Title as="h3">Formulário</Card.Title>
-          <FormCard
+          <CreateUserForm
             pacotes={pacotes}
             onPushNotification={handlePushNotification}
           />
