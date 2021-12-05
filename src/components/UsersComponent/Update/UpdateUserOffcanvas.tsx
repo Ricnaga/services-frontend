@@ -1,4 +1,3 @@
-import React from 'react';
 import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Button, ButtonGroup, ButtonToolbar, Card } from 'react-bootstrap';
 import { FieldText } from '../../@common/Input/FieldText';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Carousel, Image } from 'react-bootstrap';
 import { HomeProps } from '../../../pages/Home';
 

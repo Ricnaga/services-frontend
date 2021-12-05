@@ -1,9 +1,7 @@
-import React from 'react';
 import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Card } from 'react-bootstrap';
 import { ButtonBootstrap } from '../../@common/Button';
 import { FieldText } from '../../@common/Input/FieldText';
-import { FieldCheckbox } from '../../@common/Input/FieldCheckbox';
 
 enum FormFields {
   id = 'id',

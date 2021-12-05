@@ -1,5 +1,6 @@
 import { createServer, Model } from 'miragejs';
 import { v4 } from 'uuid';
+import { NomeCapitalize } from '../../utils/string';
 import { carouselImg } from './carouselImages';
 
 type Plan = {
@@ -33,32 +34,32 @@ export function mirageMockServer() {
       usuario: Model.extend<Partial<User>>({}),
       planosUsuarios: Model.extend<Partial<UsersPlan>>({}),
     },
-    seeds(repository) {
-      repository.create('plano', {
+    seeds(seed) {
+      seed.create('plano', {
         id: v4(),
-        nome: 'Musculação',
+        nome: NomeCapitalize('musculação'),
         basico: true,
         created_at: new Date(),
       });
-      repository.create('plano', {
+      seed.create('plano', {
         id: v4(),
-        nome: 'Funcional',
+        nome: NomeCapitalize('funcional'),
         basico: true,
         created_at: new Date(),
       });
-      repository.create('plano', {
+      seed.create('plano', {
         id: v4(),
-        nome: 'Jiujitsu',
+        nome: NomeCapitalize('jiujitsu'),
         basico: false,
         created_at: new Date(),
       });
-      repository.create('plano', {
+      seed.create('plano', {
         id: v4(),
-        nome: 'Ballet',
+        nome: NomeCapitalize('ballet'),
         basico: false,
         created_at: new Date(),
       });
-      repository.create('usuario', {
+      seed.create('usuario', {
         id: v4(),
         nome: 'Fulano de tal',
         rg: '123456789',
@@ -67,7 +68,7 @@ export function mirageMockServer() {
         conta: true,
         created_at: new Date(),
       });
-      repository.create('usuario', {
+      seed.create('usuario', {
         id: v4(),
         nome: 'Sicrano de tal',
         rg: '987654321',

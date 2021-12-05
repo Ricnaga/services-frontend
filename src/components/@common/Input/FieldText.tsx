@@ -1,6 +1,6 @@
-import React from 'react';
 import { Field } from 'formik';
 import { Form } from 'react-bootstrap';
+import { NomeCapitalize } from '../../../utils/string';
 
 type FieldTextProps = {
   name: string;
@@ -8,12 +8,12 @@ type FieldTextProps = {
 };
 
 export function FieldText({ title, ...rest }: FieldTextProps) {
-  const namePlaceHolder = title.charAt(0).toUpperCase() + title.slice(1);
+  const newTitle = NomeCapitalize(title);
   return (
     <Form.Group className="mb-2">
       <Field
         type="text"
-        placeholder={namePlaceHolder}
+        placeholder={newTitle}
         className="form-control"
         {...rest}
       />
