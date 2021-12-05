@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
-import { Button, Card } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, Card } from 'react-bootstrap';
 import { FieldText } from '../../@common/Input/FieldText';
 import { UsersFound } from './UpdateUserModalType';
 
@@ -52,17 +52,16 @@ export function UpdateUserOffcanvas({
           type="checkbox"
         />
         <Card.Footer className="mt-3 d-flex justify-content-end">
-          <Button
-            type="submit"
-            className="mx-3"
-            variant="success"
-            onClick={onConfirmationModal}
-          >
-            Salvar
-          </Button>
-          <Button type="reset" variant="danger" onClick={onClose}>
-            Cancelar
-          </Button>
+          <ButtonToolbar>
+            <ButtonGroup>
+              <Button type="submit" onClick={onConfirmationModal}>
+                Salvar
+              </Button>
+              <Button type="reset" variant="danger" onClick={onClose}>
+                Cancelar
+              </Button>
+            </ButtonGroup>
+          </ButtonToolbar>
         </Card.Footer>
       </FormFormik>
     </Formik>

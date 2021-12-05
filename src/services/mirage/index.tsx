@@ -1,5 +1,6 @@
 import { createServer, Model } from 'miragejs';
 import { v4 } from 'uuid';
+import { carouselImg } from './carouselImages';
 
 type Plan = {
   id: string;
@@ -200,6 +201,8 @@ export function mirageMockServer() {
           message: 'Erro ao apagar dados do usuário',
         };
       });
+
+      this.get('/images', () => carouselImg);
 
       this.passthrough();
     },
