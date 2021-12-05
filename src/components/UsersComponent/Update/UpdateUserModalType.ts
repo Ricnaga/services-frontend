@@ -15,7 +15,7 @@ export enum ModalModel {
 
 export type ConfirmationModalProps = {
   user: UsersFound;
-  onClose: () => void;
+  onConfirmationModalClose: () => void;
   onPushNotification: (
     newTitle: string,
     newColor: 'success' | 'danger',
@@ -25,7 +25,7 @@ export type ConfirmationModalProps = {
 };
 
 export type DeleteModalProps = {
-  onClose: () => void;
+  onDeleteModalClose: () => void;
   user: UsersFound;
   onPushNotification: (
     newTitle: string,

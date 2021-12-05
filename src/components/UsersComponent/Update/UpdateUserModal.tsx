@@ -9,17 +9,17 @@ import {
 
 function ConfirmationModal({
   user,
-  onClose,
+  onConfirmationModalClose,
   onHideOffCanvasClose,
   setUsers,
   onPushNotification,
 }: ConfirmationModalProps) {
-  const handleCloseModal = () => {
+  const onClose = () => {
     const { id, conta, email, endereco, nome, rg } = user;
     api
       .patch(`/users/${id}`, { nome, rg, endereco, email, conta })
       .then(responseId => {
-        onClose();
+        onConfirmationModalClose();
         onHideOffCanvasClose();
         onPushNotification(responseId.data.message, 'success');
         api
@@ -53,10 +53,10 @@ function ConfirmationModal({
         Deseja realmente alterar as informações desse cliente ?
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleCloseModal}>
+        <Button variant="primary" onClick={onClose}>
           Sim
         </Button>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="secondary" onClick={onConfirmationModalClose}>
           Não
         </Button>
       </Modal.Footer>
@@ -65,17 +65,17 @@ function ConfirmationModal({
 }
 
 function DeleteModal({
-  onClose,
+  onDeleteModalClose,
   user,
   onPushNotification,
   setUsers,
 }: DeleteModalProps) {
-  const handleCloseModal = () => {
+  const onClose = () => {
     api
       .delete(`/users/${user.id}`)
       .then(responseId => {
         onPushNotification(responseId.data.message, 'success');
-        onClose();
+        onDeleteModalClose();
         api
           .get('/users', {
             params: {
@@ -108,10 +108,10 @@ function DeleteModal({
         apagar, clique em cancelar
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleCloseModal}>
+        <Button variant="primary" onClick={onClose}>
           Apagar
         </Button>
-        <Button variant="secondary" onClick={onClose}>
+        <Button variant="secondary" onClick={onDeleteModalClose}>
           Cancelar
         </Button>
       </Modal.Footer>
@@ -133,7 +133,7 @@ export function UpdateUserModal({
         <ConfirmationModal
           setUsers={setUsers}
           user={user}
-          onClose={onCloseUpdateUserModal}
+          onConfirmationModalClose={onCloseUpdateUserModal}
           onHideOffCanvasClose={handleOffCanvas}
           onPushNotification={onPushNotification}
         />
@@ -143,7 +143,7 @@ export function UpdateUserModal({
         <DeleteModal
           user={user}
           setUsers={setUsers}
-          onClose={onCloseUpdateUserModal}
+          onDeleteModalClose={onCloseUpdateUserModal}
           onPushNotification={onPushNotification}
         />
       );
