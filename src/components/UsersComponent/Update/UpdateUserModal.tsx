@@ -9,7 +9,7 @@ import {
 
 function ConfirmationModal({
   user,
-  onModalClose,
+  onClose,
   onHideOffCanvasClose,
   setUsers,
   onPushNotification,
@@ -19,7 +19,7 @@ function ConfirmationModal({
     api
       .patch(`/users/${id}`, { nome, rg, endereco, email, conta })
       .then(responseId => {
-        onModalClose();
+        onClose();
         onHideOffCanvasClose();
         onPushNotification(responseId.data.message, 'success');
         api
@@ -56,7 +56,7 @@ function ConfirmationModal({
         <Button variant="primary" onClick={handleCloseModal}>
           Sim
         </Button>
-        <Button variant="secondary" onClick={onModalClose}>
+        <Button variant="secondary" onClick={onClose}>
           Não
         </Button>
       </Modal.Footer>
@@ -65,7 +65,7 @@ function ConfirmationModal({
 }
 
 function DeleteModal({
-  onModalClose,
+  onClose,
   user,
   onPushNotification,
   setUsers,
@@ -75,7 +75,7 @@ function DeleteModal({
       .delete(`/users/${user.id}`)
       .then(responseId => {
         onPushNotification(responseId.data.message, 'success');
-        onModalClose();
+        onClose();
         api
           .get('/users', {
             params: {
@@ -111,7 +111,7 @@ function DeleteModal({
         <Button variant="primary" onClick={handleCloseModal}>
           Apagar
         </Button>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="secondary" onClick={onClose}>
           Cancelar
         </Button>
       </Modal.Footer>
@@ -122,7 +122,7 @@ function DeleteModal({
 export function UpdateUserModal({
   tipo,
   user,
-  handleModal,
+  onCloseUpdateUserModal,
   handleOffCanvas,
   setUsers,
   onPushNotification,
@@ -133,7 +133,7 @@ export function UpdateUserModal({
         <ConfirmationModal
           setUsers={setUsers}
           user={user}
-          onModalClose={handleModal}
+          onClose={onCloseUpdateUserModal}
           onHideOffCanvasClose={handleOffCanvas}
           onPushNotification={onPushNotification}
         />
@@ -143,7 +143,7 @@ export function UpdateUserModal({
         <DeleteModal
           user={user}
           setUsers={setUsers}
-          onModalClose={handleModal}
+          onClose={onCloseUpdateUserModal}
           onPushNotification={onPushNotification}
         />
       );

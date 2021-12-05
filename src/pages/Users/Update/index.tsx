@@ -115,7 +115,7 @@ export function UpdateUsers() {
             setUsers={setUsers}
             user={user}
             tipo={tipoModal}
-            handleModal={handleCloseModal}
+            onCloseUpdateUserModal={handleCloseModal}
             handleOffCanvas={handleCloseOffCanvas}
             onPushNotification={handlePushNotification}
           />
