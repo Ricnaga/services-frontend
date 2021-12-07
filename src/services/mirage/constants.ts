@@ -1,7 +1,14 @@
+import { v4 } from 'uuid';
+
+export const mockedFulanoUserId = v4();
+export const mockedSicranoUserId = v4();
+export const mockedPlanoBasicoId = v4();
+export const mockedPlanoAdicionalId = v4();
+
 const height = 400;
 const width = 1024;
 
-export const carouselImg = [
+export const randomImages = [
   {
     title: 'Musculação',
     description: 'Fique monstro, mas com a gente é mais rápido rsrs',
@@ -23,3 +30,10 @@ export const carouselImg = [
     url: `https://images.unsplash.com/photo-1624938518616-3be0add427d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=${width}&h=${height}&q=80`,
   },
 ];
+
+export enum ServicosEnum {
+  musculacao = 'musculação',
+  funcional = 'funcional',
+  jiujitsu = 'jiujitsu',
+  ballet = 'ballet',
+}
