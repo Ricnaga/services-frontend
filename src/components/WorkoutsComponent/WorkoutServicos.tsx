@@ -1,5 +1,5 @@
+import React, { useState } from 'react';
 import { FormikValues } from 'formik';
-import { useState } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import api from '../../services/api';
 import { ServicesModal } from '../@common/Modal';
@@ -34,6 +34,7 @@ export type WorkoutServicosPlanosUsuarioProps = {
 };
 
 export function WorkoutServicos() {
+  const [loading, setLoading] = useState<boolean>(false);
   const [users, setUsers] = useState<WorkoutServicosProps[] | null>(null);
   const [planosUsuario, setPlanosUsuario] = useState<string[] | null>(null);
   const [pacotes, setPacotes] = useState<WorkoutServicosPlanosProps | null>(
@@ -66,15 +67,17 @@ export function WorkoutServicos() {
   };
 
   const handleOpenOffCanvas = (id: string, nome: string) => {
+    setLoading(true);
     api
       .get('/plans')
       .then(responsePlans => setPacotes(responsePlans.data))
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         handlePushNotification(
           'Erro ao buscar lista de serviço, tente novamente',
           'danger',
-        ),
-      );
+        );
+      });
 
     api
       .get(`/usersPlans/${id}`)
@@ -82,8 +85,12 @@ export function WorkoutServicos() {
         setTitle(nome);
         setPacotesUsuario(response.data);
         setIsOpenOffCanvas(true);
+        setLoading(false);
       })
-      .catch(response => handlePushNotification(response, 'danger'));
+      .catch(response => {
+        setLoading(false);
+        handlePushNotification(response, 'danger');
+      });
   };
   const handleCloseOffCanvas = () => setIsOpenOffCanvas(false);
 
@@ -93,19 +100,24 @@ export function WorkoutServicos() {
   const handleCloseModal = () => setIsOpenDecisionModal(false);
 
   const handleFindUser = (values: FormikValues) => {
+    setLoading(true);
     api
       .get('/users', {
         params: {
           values,
         },
       })
-      .then(response => setUsers(response.data))
-      .catch(() =>
+      .then(response => {
+        setLoading(false);
+        setUsers(response.data);
+      })
+      .catch(() => {
+        setLoading(false);
         handlePushNotification(
           'Erro ao buscar dados do cliente, tente novamente',
           'danger',
-        ),
-      );
+        );
+      });
   };
 
   return (
@@ -115,13 +127,17 @@ export function WorkoutServicos() {
           <Card>
             <Card.Header as="h1">Alterar serviço do cliente</Card.Header>
             <Card.Body className="px-4">
-              <WorkoutServicoForm onFindUser={handleFindUser} />
+              <WorkoutServicoForm
+                loading={loading}
+                onFindUser={handleFindUser}
+              />
             </Card.Body>
           </Card>
         </Col>
         {users && (
           <Col>
             <WorkoutServicoUserTable
+              loading={loading}
               onOpenOffCanvas={handleOpenOffCanvas}
               users={users}
             />

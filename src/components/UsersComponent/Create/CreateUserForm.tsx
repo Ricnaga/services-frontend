@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Card, Col, Form, ListGroup, Row } from 'react-bootstrap';
 import { CreateUserProps } from '../../../pages/Users/Create';
@@ -6,6 +7,7 @@ import { ButtonBootstrap } from '../../@common/Button';
 import { FieldCheckbox } from '../../@common/Input/FieldCheckbox';
 import { FieldText } from '../../@common/Input/FieldText';
 import { LoadingCard } from '../../@common/Loading/LoadingCard';
+import { LoadingButton } from '../../@common/Loading/LoadingButton';
 
 type FormCardProps = {
   pacotes: CreateUserProps | null;
@@ -24,6 +26,7 @@ enum FormFields {
 }
 
 export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
+  const [loading, setLoading] = useState<boolean>(false);
   if (!pacotes) return <LoadingCard />;
 
   const initialValues = {
@@ -34,14 +37,17 @@ export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
     [FormFields.planos]: [],
   };
   const onSubmit = async (values: FormikValues) => {
+    setLoading(true);
     return api
       .post('/users', values)
-      .then(() =>
-        onPushNotification('Cadastro realizado com sucesso', 'success'),
-      )
-      .catch(() =>
-        onPushNotification('Não foi possível realizar o cadastro', 'danger'),
-      );
+      .then(() => {
+        setLoading(false);
+        onPushNotification('Cadastro realizado com sucesso', 'success');
+      })
+      .catch(() => {
+        setLoading(false);
+        onPushNotification('Não foi possível realizar o cadastro', 'danger');
+      });
   };
 
   return (
@@ -107,9 +113,12 @@ export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
             </Card>
           </Col>
         </Row>
-
         <Card.Footer className="mt-3 d-flex justify-content-end">
-          <ButtonBootstrap title="Cadastrar" type="submit" />
+          {loading ? (
+            <LoadingButton />
+          ) : (
+            <ButtonBootstrap title="Cadastrar" type="submit" />
+          )}
         </Card.Footer>
       </FormFormik>
     </Formik>

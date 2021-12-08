@@ -1,5 +1,6 @@
 import { Button, Modal } from 'react-bootstrap';
 import api from '../../../services/api';
+import { LoadingButton } from '../../@common/Loading/LoadingButton';
 import {
   ConfirmationModalProps,
   DeleteModalProps,
@@ -12,10 +13,13 @@ function ConfirmationModal({
   onConfirmationModalClose,
   onHideOffCanvasClose,
   setUsers,
+  loading,
+  setLoading,
   onPushNotification,
 }: ConfirmationModalProps) {
   const onClose = () => {
     const { id, conta, email, endereco, nome, rg } = user;
+    setLoading(true);
     api
       .patch(`/users/${id}`, { nome, rg, endereco, email, conta })
       .then(responseId => {
@@ -35,17 +39,22 @@ function ConfirmationModal({
               },
             },
           })
-          .then(response => setUsers(response.data))
-          .catch(response =>
-            onPushNotification(response.data.message, 'danger'),
-          );
+          .then(response => {
+            setLoading(false);
+            setUsers(response.data);
+          })
+          .catch(response => {
+            setLoading(false);
+            onPushNotification(response.data.message, 'danger');
+          });
       })
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         onPushNotification(
           'Erro ao atualizar dados do usuário, tente novamente',
           'danger',
-        ),
-      );
+        );
+      });
   };
   return (
     <>
@@ -53,9 +62,13 @@ function ConfirmationModal({
         Deseja realmente alterar as informações desse cliente ?
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onClose}>
-          Sim
-        </Button>
+        {!loading ? (
+          <Button variant="primary" onClick={onClose}>
+            Sim
+          </Button>
+        ) : (
+          <LoadingButton />
+        )}
         <Button variant="secondary" onClick={onConfirmationModalClose}>
           Não
         </Button>
@@ -69,8 +82,11 @@ function DeleteModal({
   user,
   onPushNotification,
   setUsers,
+  loading,
+  setLoading,
 }: DeleteModalProps) {
   const onClose = () => {
+    setLoading(true);
     api
       .delete(`/users/${user.id}`)
       .then(responseId => {
@@ -89,17 +105,22 @@ function DeleteModal({
               },
             },
           })
-          .then(response => setUsers(response.data))
-          .catch(response =>
-            onPushNotification(response.data.message, 'danger'),
-          );
+          .then(response => {
+            setLoading(false);
+            setUsers(response.data);
+          })
+          .catch(response => {
+            setLoading(false);
+            onPushNotification(response.data.message, 'danger');
+          });
       })
-      .catch(() =>
+      .catch(() => {
+        setLoading(false);
         onPushNotification(
           'Erro ao atualizar dados do usuário, tente novamente',
           'danger',
-        ),
-      );
+        );
+      });
   };
   return (
     <>
@@ -108,9 +129,13 @@ function DeleteModal({
         apagar, clique em cancelar
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onClose}>
-          Apagar
-        </Button>
+        {!loading ? (
+          <Button variant="primary" onClick={onClose}>
+            Apagar
+          </Button>
+        ) : (
+          <LoadingButton />
+        )}
         <Button variant="secondary" onClick={onDeleteModalClose}>
           Cancelar
         </Button>
@@ -122,9 +147,11 @@ function DeleteModal({
 export function UpdateUserModal({
   tipo,
   user,
+  loading,
   onCloseUpdateUserModal,
   handleOffCanvas,
   setUsers,
+  setLoading,
   onPushNotification,
 }: UpdateUserModalProps) {
   switch (tipo) {
@@ -132,7 +159,9 @@ export function UpdateUserModal({
       return (
         <ConfirmationModal
           setUsers={setUsers}
+          setLoading={setLoading}
           user={user}
+          loading={loading}
           onConfirmationModalClose={onCloseUpdateUserModal}
           onHideOffCanvasClose={handleOffCanvas}
           onPushNotification={onPushNotification}
@@ -142,7 +171,9 @@ export function UpdateUserModal({
       return (
         <DeleteModal
           user={user}
+          loading={loading}
           setUsers={setUsers}
+          setLoading={setLoading}
           onDeleteModalClose={onCloseUpdateUserModal}
           onPushNotification={onPushNotification}
         />

@@ -15,6 +15,7 @@ import { UpdateUserOffcanvas } from '../../../components/UsersComponent/Update/U
 import { PushNotification } from '../../../components/@common/PushNotification';
 
 export function UpdateUsers() {
+  const [loading, setLoading] = useState<boolean>(false);
   const [tipoModal, setTipoModal] = useState<ModalModel>();
   const [isOpenOffCanvas, setIsOpenOffCanvas] = useState<boolean>(false);
   const [isOpenDecisionModal, setIsOpenDecisionModal] =
@@ -48,13 +49,17 @@ export function UpdateUsers() {
     setIsOpenDeleteModal(false);
   };
   const handleFindUser = (values: FormikValues) => {
+    setLoading(true);
     api
       .get('/users', {
         params: {
           values,
         },
       })
-      .then(response => setUsers(response.data));
+      .then(response => {
+        setLoading(false);
+        setUsers(response.data);
+      });
   };
 
   const [color, setColor] = useState<'success' | 'danger'>('success');
@@ -77,7 +82,7 @@ export function UpdateUsers() {
           <Card>
             <Card.Header as="h1">Alterar dados do cliente</Card.Header>
             <Card.Body className="px-4">
-              <UpdateUserForm onFindUser={handleFindUser} />
+              <UpdateUserForm loading={loading} onFindUser={handleFindUser} />
             </Card.Body>
           </Card>
         </Col>
@@ -112,7 +117,9 @@ export function UpdateUsers() {
       >
         {user && tipoModal && (
           <UpdateUserModal
+            loading={loading}
             setUsers={setUsers}
+            setLoading={setLoading}
             user={user}
             tipo={tipoModal}
             onCloseUpdateUserModal={handleCloseModal}

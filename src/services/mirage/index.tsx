@@ -118,7 +118,6 @@ export function mirageMockServer() {
           request.requestBody,
         );
         const user_id = v4();
-
         const userData = {
           nome,
           rg,
@@ -131,36 +130,40 @@ export function mirageMockServer() {
 
         const { id } = schema.create('usuario', userData);
 
-        const planosFormatados = schema
+        const planosDB = schema
           .where('plano', collection => collection)
           .models.map(model => model.attrs);
 
-        if (planos.find((plan: string) => plan === 'basico') === 'basico') {
-          planosFormatados
-            .filter(plano => plano.basico)
-            .map(dados => {
-              return schema.create('planosUsuario', {
-                id: v4(),
-                user_id,
-                service_id: dados.id,
-                created_at: new Date(),
-              });
-            });
-        }
+        planos.map((plano: string) => {
+          if (plano === 'basico')
+            return planosDB
+              .map(planoDB => {
+                if (planoDB.basico)
+                  return schema.create('planosUsuario', {
+                    id: v4(),
+                    user_id,
+                    service_id: planoDB.id,
+                    created_at: new Date(),
+                  });
 
-        planosFormatados
-          .filter(
-            plano =>
-              planos.find((plan: string) => plan === plano.nome) === plano.nome,
-          )
-          .map(dados => {
-            return schema.create('planosUsuarios', {
-              id: v4(),
-              user_id,
-              service_id: dados.id,
-              created_at: new Date(),
-            });
-          });
+                return null;
+              })
+              .filter(planoDB => planoDB);
+
+          return planosDB
+            .map(planoDB => {
+              if (planoDB.nome === plano)
+                return schema.create('planosUsuario', {
+                  id: v4(),
+                  user_id,
+                  service_id: planoDB.id,
+                  created_at: new Date(),
+                });
+
+              return null;
+            })
+            .filter(planoDB => planoDB);
+        });
 
         return {
           id,

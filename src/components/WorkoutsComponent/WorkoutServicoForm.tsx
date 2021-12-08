@@ -2,6 +2,7 @@ import { Field, Form as FormFormik, Formik, FormikValues } from 'formik';
 import { Card } from 'react-bootstrap';
 import { ButtonBootstrap } from '../@common/Button';
 import { FieldText } from '../@common/Input/FieldText';
+import { LoadingButton } from '../@common/Loading/LoadingButton';
 
 enum FormFields {
   id = 'id',
@@ -14,9 +15,13 @@ enum FormFields {
 
 interface WorkoutServicoFormProps {
   onFindUser: (values: FormikValues) => void;
+  loading: boolean;
 }
 
-export function WorkoutServicoForm({ onFindUser }: WorkoutServicoFormProps) {
+export function WorkoutServicoForm({
+  onFindUser,
+  loading,
+}: WorkoutServicoFormProps) {
   const initialValues = {
     [FormFields.id]: '',
     [FormFields.nome]: '',
@@ -41,7 +46,11 @@ export function WorkoutServicoForm({ onFindUser }: WorkoutServicoFormProps) {
           type="checkbox"
         />
         <Card.Footer className="mt-3 d-flex justify-content-end">
-          <ButtonBootstrap title="Buscar" type="submit" />
+          {!loading ? (
+            <ButtonBootstrap title="Buscar" type="submit" />
+          ) : (
+            <LoadingButton />
+          )}
         </Card.Footer>
       </FormFormik>
     </Formik>

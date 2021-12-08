@@ -1,15 +1,18 @@
 import { Button, Table } from 'react-bootstrap';
 import { BsTools as ChangeIcon } from 'react-icons/bs';
+import { LoadingButton } from '../@common/Loading/LoadingButton';
 import { UsersFound } from '../UsersComponent/Update/UpdateUserModalType';
 
 interface WorkoutServicoUserTableProps {
   onOpenOffCanvas: (id: string, nome: string) => void;
   users: Array<UsersFound>;
+  loading: boolean;
 }
 
 export function WorkoutServicoUserTable({
   onOpenOffCanvas,
   users,
+  loading,
 }: WorkoutServicoUserTableProps) {
   return (
     <Table responsive striped bordered hover variant="dark">
@@ -37,9 +40,15 @@ export function WorkoutServicoUserTable({
             <td>{usuario.endereco}</td>
             <td>{usuario.conta === true ? 'sim' : 'não'}</td>
             <td>
-              <Button onClick={() => onOpenOffCanvas(usuario.id, usuario.nome)}>
-                <ChangeIcon />
-              </Button>
+              {!loading ? (
+                <Button
+                  onClick={() => onOpenOffCanvas(usuario.id, usuario.nome)}
+                >
+                  <ChangeIcon />
+                </Button>
+              ) : (
+                <LoadingButton />
+              )}
             </td>
           </tr>
         </tbody>
