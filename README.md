@@ -1,3 +1,8 @@
+<div align="center">
+  <img src="./cover.jpg" />
+  <img src="./mobile.jpg" />
+</div>
+
 # <div align="center"> Services Frontend </div>
 
 #### <div align="right">- Projeto Finalizado🟢 <div>

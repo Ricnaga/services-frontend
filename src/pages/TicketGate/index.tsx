@@ -61,7 +61,7 @@ export function TicketGate() {
                 value={formik.values[TicketGateFormFields.id]}
               />
               {!loading ? (
-                <Button size="lg" variant="outline-secondary" type="submit">
+                <Button size="lg" variant="outline-warning" type="submit">
                   Entrar
                 </Button>
               ) : (

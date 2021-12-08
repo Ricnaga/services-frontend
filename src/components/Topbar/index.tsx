@@ -3,7 +3,7 @@ import { LiveClock } from './clock';
 
 export function Topbar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Toggle />
         <Navbar.Collapse>

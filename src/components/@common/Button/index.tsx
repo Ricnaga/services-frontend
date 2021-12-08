@@ -8,7 +8,7 @@ type ButtonBootstrapProps = {
 
 export function ButtonBootstrap({ title, type }: ButtonBootstrapProps) {
   return (
-    <Button variant="primary" type={type} size="lg">
+    <Button variant="outline-warning" type={type} size="lg">
       {title}
     </Button>
   );

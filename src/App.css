@@ -1,0 +1,10 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, input,textarea, button{
+  font:400 1rem 'Jura', sans-serif;
+  background:linear-gradient(to bottom right, #EDF6F9, #ADE8F4) no-repeat fixed;
+}
