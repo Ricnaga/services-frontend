@@ -202,7 +202,7 @@ export function mirageMockServer() {
 
         if (findUser)
           return {
-            message: 'Usuário encontrado, entrada permitida!',
+            id: findUser.id,
           };
 
         return {

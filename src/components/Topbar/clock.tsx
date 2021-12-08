@@ -10,7 +10,7 @@ export function LiveClock() {
     setInterval(() => {
       setClock(null);
       setClock(getDateCalendarHour());
-    }, 60000);
+    }, 30000);
   }, [clock]);
 
   return (

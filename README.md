@@ -1,22 +1,20 @@
-# <div align="center"> Lacademi </div>
+# <div align="center"> Services Frontend </div>
 
 #### <div align="right">- Projeto Finalizado🟢 <div>
 
-### <div align="center"> Desenvolvido em react para exercitar funções de javascript e react, abordando conceitos sobre: </div>
+### <div align="center"> Aplicação em Reactjs/Typescript, abordando conceitos sobre: </div>
 
-#### 1. Typescript: tipagens
-#### 2. ReactJS: components
-#### 3. ReactJS: propriedades
-#### 4. ReactJS: estados
-#### 5. ReactJS: rotas
-#### 6. Styled components
-#### 7. Utilização de api fake utilizando MirageJS
+#### - Reactjs: useState e useEffect
+#### - React router dom: roteamento de páginas
+#### - Typescript: Tipagens
+#### - React-Boostrap: Componentes personalizados
+#### - Miragejs: mock de Api
+#### - Axios: obtendo dados da Api mockada
 
 ## <div align="center"> Sumário </div>
 <!--ts-->
    - [Requisitos](#<div-align="center">Requisitos</div>)
    - [Tecnologias utilizadas](#<div-align="center">Tecnologias-utilizadas</div>)
-   - [Autor](#<div-align="center">Autor</div>)
 
 <!--te-->
 ## <div align="center">Requisitos</div>
@@ -24,10 +22,10 @@ Para executar a aplicação é necessário instalar algumas ferramentas tais com
 
 ```bash
 # Baixe o repositório.
-$ git clone https://github.com/Ricnaga/lacademi-frontend
+$ git clone https://github.com/Ricnaga/services-frontend
 
 # Acesse a pasta do projeto.
-$ cd lacademi-frontend
+$ cd services-frontend
 
 # Agora que baixou e acessou o repositório, vamos começar a instalação das dependências.
 $ yarn ( caso não utilize o yarn execute apenas npm -i)
@@ -43,19 +41,17 @@ $ yarn start (caso não utilize o yarn: npm run start)
 ```
 
 ##  <div align="center">Tecnologias utilizadas</div>
-- [HTML](https://www.w3.org/HTML)
-- [NodeJS](https://nodejs.org/en/)
-- [Git Bash](https://gitforwindows.org/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [React JS](https://pt-br.reactjs.org/)
-- [Mirage JS](https://miragejs.com/)
+- [Reactjs](https://pt-br.reactjs.org/)
+- [React-bootstrap](https://react-bootstrap.github.io/)
+- [Miragejs](https://miragejs.com/)
+- [Axios](https://axios-http.com/docs/intro)
 
 
-## <div align="center">Autor</div>
 <div align="center">Aplicação desenvolvida por minha pessoa.
 Gostou? tem alguma sugestão de melhoria? por favor, entre em contato e ja aproveita e me adiciona.<br>
-<a href="https://www.linkedin.com/in/ricardo-nagatomy-56553254"><img src="https://img.shields.io/badge/-RicardoNaga-blue?style=flat-square&logo=Linkedin&logoColor=white"></a>
-<a href="https://app.rocketseat.com.br/me/ricardo-nagatomy-08130"><img src="https://img.shields.io/badge/-Rocketseat-000?style=flat-square&logo=&logoColor=white"></a>
+<a href="https://www.linkedin.com/in/ricardo-nagatomy"><img src="https://img.shields.io/badge/-RicardoNaga-blue?style=flat-square&logo=Linkedin&logoColor=white"></a>
+<a href="https://app.rocketseat.com.br/me/ricardo-nagatomy"><img src="https://img.shields.io/badge/-Rocketseat-000?style=flat-square&logo=&logoColor=white"></a>
 </div>
 
 #
