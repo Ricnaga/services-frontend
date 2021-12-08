@@ -53,10 +53,14 @@ export function UpdateUserOffcanvas({
         <Card.Footer className="mt-3 d-flex justify-content-end">
           <ButtonToolbar>
             <ButtonGroup>
-              <Button type="submit" onClick={onConfirmationModal}>
+              <Button
+                type="submit"
+                variant="outline-primary"
+                onClick={onConfirmationModal}
+              >
                 Salvar
               </Button>
-              <Button type="reset" variant="danger" onClick={onClose}>
+              <Button type="reset" variant="outline-danger" onClick={onClose}>
                 Cancelar
               </Button>
             </ButtonGroup>

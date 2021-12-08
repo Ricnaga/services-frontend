@@ -63,13 +63,13 @@ function ConfirmationModal({
       </Modal.Body>
       <Modal.Footer>
         {!loading ? (
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="outline-primary" onClick={onClose}>
             Sim
           </Button>
         ) : (
           <LoadingButton />
         )}
-        <Button variant="secondary" onClick={onConfirmationModalClose}>
+        <Button variant="outline-secondary" onClick={onConfirmationModalClose}>
           Não
         </Button>
       </Modal.Footer>
@@ -130,13 +130,13 @@ function DeleteModal({
       </Modal.Body>
       <Modal.Footer>
         {!loading ? (
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="outline-primary" onClick={onClose}>
             Apagar
           </Button>
         ) : (
           <LoadingButton />
         )}
-        <Button variant="secondary" onClick={onDeleteModalClose}>
+        <Button variant="outline-secondary" onClick={onDeleteModalClose}>
           Cancelar
         </Button>
       </Modal.Footer>

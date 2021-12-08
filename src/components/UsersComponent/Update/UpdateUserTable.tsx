@@ -42,12 +42,18 @@ export function UpdateUserTable({
             <td>{usuario.endereco}</td>
             <td>{usuario.conta === true ? 'sim' : 'não'}</td>
             <td>
-              <Button onClick={() => onOpenOffCanvas(usuario)}>
+              <Button
+                variant="outline-primary"
+                onClick={() => onOpenOffCanvas(usuario)}
+              >
                 <ChangeIcon />
               </Button>
             </td>
             <td>
-              <Button onClick={() => onOpenDeleteModal(usuario)}>
+              <Button
+                variant="outline-primary"
+                onClick={() => onOpenDeleteModal(usuario)}
+              >
                 <TrashIcon />
               </Button>
             </td>

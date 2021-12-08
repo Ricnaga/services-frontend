@@ -52,13 +52,13 @@ export function WorkoutServicoModal({
       </Modal.Body>
       <Modal.Footer>
         {!loading ? (
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="outline-primary" onClick={onClose}>
             Sim
           </Button>
         ) : (
           <LoadingButton />
         )}
-        <Button variant="secondary" onClick={onConfirmationModalClose}>
+        <Button variant="outline-secondary" onClick={onConfirmationModalClose}>
           Não
         </Button>
       </Modal.Footer>

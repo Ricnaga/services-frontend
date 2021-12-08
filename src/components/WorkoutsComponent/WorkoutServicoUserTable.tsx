@@ -42,6 +42,7 @@ export function WorkoutServicoUserTable({
             <td>
               {!loading ? (
                 <Button
+                  variant="outline-primary"
                   onClick={() => onOpenOffCanvas(usuario.id, usuario.nome)}
                 >
                   <ChangeIcon />
