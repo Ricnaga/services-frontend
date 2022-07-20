@@ -23,6 +23,7 @@
     "start": "react-scripts start",
     "lint": "eslint --ext .ts --ext .tsx src",
     "lint:fix": "yarn lint --fix",
+    "prepare": "husky install",
     "precommit": "lint-staged",
     "build": "react-scripts build",
     "test": "react-scripts test",
