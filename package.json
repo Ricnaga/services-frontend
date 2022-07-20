@@ -21,8 +21,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint --ext .ts --ext .tsx src/",
-    "lint:fix": "eslint --fix --ext .ts --ext .tsx src",
+    "lint": "eslint --ext .ts --ext .tsx src",
+    "lint:fix": "yarn lint --fix",
     "precommit": "lint-staged",
     "build": "react-scripts build",
     "test": "react-scripts test",
