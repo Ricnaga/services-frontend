@@ -53,6 +53,7 @@
         "react/jsx-no-bind": "off",
         "react/require-default-props": "off",
         "no-shadow": "off",
+        "camelcase": "off"
     },
     "settings": {
         "import/resolver": {
