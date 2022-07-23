@@ -1,18 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom';
 import { Topbar } from './components/Topbar';
-import { RoutesPages } from './routes';
-import { mirageMockServer } from './services/mirage';
+import { ProviderRouter } from './application/routes';
 import './App.css';
-
-mirageMockServer();
 
 export function App() {
   return (
-    <BrowserRouter>
+    <ProviderRouter>
       <Topbar />
-      <RoutesPages />
-    </BrowserRouter>
+    </ProviderRouter>
   );
 }
