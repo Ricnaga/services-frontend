@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { BsClock } from 'react-icons/bs';
 import { getDateCalendarHour } from '../../utils/date';
 
 export function LiveClock() {
-  const [clock, setClock] = useState<String | null>(getDateCalendarHour());
+  const [clock, setClock] = useState<string | null>(getDateCalendarHour());
 
   useEffect(() => {
     setInterval(() => {

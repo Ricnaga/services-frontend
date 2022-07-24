@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 
 interface PushNotificationProps {
@@ -10,7 +10,7 @@ interface PushNotificationProps {
 
 export function PushNotification({
   title,
-  color,
+  color = 'success',
   isOpen,
   onClose,
 }: PushNotificationProps) {

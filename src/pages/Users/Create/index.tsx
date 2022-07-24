@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
-import { PushNotification } from '../../../components/@common/PushNotification';
+import { PushNotification } from '../../../shared/components/PushNotification';
 import { CreateUserForm } from './components/CreateUserForm';
 import { useCreateUsers } from './hooks/useCreateUsers';
 

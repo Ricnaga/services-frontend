@@ -6,8 +6,8 @@ import {
   WorkoutServicoOffCanvas,
   WorkoutServicoUserTable,
 } from '..';
-import { ServicesOffcanvas } from '../../../../components/@common/OffCanvas';
-import { PushNotification } from '../../../../components/@common/PushNotification';
+import { ServicesOffcanvas } from '../../../../shared/components/OffCanvas';
+import { PushNotification } from '../../../../shared/components/PushNotification';
 import { BootstrapModal } from '../../../../shared/components/BootstrapModal';
 import { useWorkoutServicos } from './hooks/useWorkoutServicos';
 

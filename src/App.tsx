@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Topbar } from './components/Topbar';
+import { Topbar } from './shared/components/Topbar';
 import { ProviderRouter } from './application/routes';
 import './App.css';
 

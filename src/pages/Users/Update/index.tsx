@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import { ServicesOffcanvas } from '../../../components/@common/OffCanvas';
+import { ServicesOffcanvas } from '../../../shared/components/OffCanvas';
 import {
   UpdateUserTable,
   UpdateUserDeleteModal,
@@ -8,7 +8,7 @@ import {
   UpdateUserOffCanvasModal,
   UpdateUserOffcanvas,
 } from './components';
-import { PushNotification } from '../../../components/@common/PushNotification';
+import { PushNotification } from '../../../shared/components/PushNotification';
 import { useUpdateUsers } from './hooks/useUpdateUsers';
 import { BootstrapModal } from '../../../shared/components/BootstrapModal';
 
