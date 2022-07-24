@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form as FormFormik, Formik } from 'formik';
 import {
   ButtonGroup,
@@ -9,15 +8,15 @@ import {
   ListGroup,
   Row,
 } from 'react-bootstrap';
-import { FieldCheckbox } from '../../../../shared/components/Input/FieldCheckbox';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
 import { GetPlansItems } from '../../../../application/api/endpoints/plans';
 import { GetUserPlansByIdItems } from '../../../../application/api/endpoints/usersPlans';
+import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
+import { FieldCheckbox } from '../../../../shared/components/Input/FieldCheckbox';
+import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
 import {
   useWorkoutServicoOffCanvas,
   UseWorkoutServicoOffCanvasOnSubmit,
 } from './hooks/useWorkoutServicoOffCanvas';
-import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
 
 export type WorkoutServicoOffcanvasPlanosProps = {
   id: string;

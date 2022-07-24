@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-  GetPlansItems,
   getPlans,
+  GetPlansItems,
 } from '../../../../application/api/endpoints/plans';
 
 type ToastProps = {

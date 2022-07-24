@@ -1,10 +1,9 @@
-import React from 'react';
 import { Field, Form as FormFormik, Formik } from 'formik';
 import { Card } from 'react-bootstrap';
+import { GetUsersParamsItems } from '../../../../application/api/endpoints/users';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
 import { FieldText } from '../../../../shared/components/Input/FieldText';
 import { useWorkoutServicoForm } from './hooks/useWorkoutServicoForm';
-import { GetUsersParamsItems } from '../../../../application/api/endpoints/users';
 
 interface WorkoutServicoFormProps {
   onFindUser: (values: Omit<GetUsersParamsItems, 'created_at'>) => void;

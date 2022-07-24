@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
 import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';

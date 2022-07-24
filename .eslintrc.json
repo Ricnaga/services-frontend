@@ -1,63 +1,59 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "prettier",
-        "import"
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
     ],
-    "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "endOfLine": "auto"
-            }
-        ],
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "ts": "never",
-                "tsx": "never"
-            }
-        ],
-        "import/prefer-default-export": "off",
-        "import/no-unresolved": "error",
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".jsx",
-                    ".tsx"
-                ]
-            }
-        ],
-        "react/jsx-props-no-spreading": "off",
-        "react/jsx-no-bind": "off",
-        "react/require-default-props": "off",
-        "no-shadow": "off",
-        "camelcase": "off"
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "error",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".jsx", ".tsx"]
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-no-bind": "off",
+    "react/require-default-props": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-shadow": "off",
+    "camelcase": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
     },
-    "settings": {
-        "import/resolver": {
-            "typescript": {}
-        }
+    "react": {
+      "version": "detect"
     }
+  }
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from 'react-bootstrap/Container';
 import { HomeCarousel } from './components/HomeCarousel';
 import { useHome } from './hooks/useHome';

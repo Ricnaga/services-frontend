@@ -1,4 +1,3 @@
-import React from 'react';
 import { Carousel, Image } from 'react-bootstrap';
 import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
 

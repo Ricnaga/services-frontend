@@ -1,16 +1,15 @@
-import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import { BootstrapModal } from '../../../shared/components/BootstrapModal';
 import { ServicesOffcanvas } from '../../../shared/components/OffCanvas';
+import { PushNotification } from '../../../shared/components/PushNotification';
 import {
-  UpdateUserTable,
   UpdateUserDeleteModal,
   UpdateUserForm,
-  UpdateUserOffCanvasModal,
   UpdateUserOffcanvas,
+  UpdateUserOffCanvasModal,
+  UpdateUserTable,
 } from './components';
-import { PushNotification } from '../../../shared/components/PushNotification';
 import { useUpdateUsers } from './hooks/useUpdateUsers';
-import { BootstrapModal } from '../../../shared/components/BootstrapModal';
 
 export function UpdateUsers() {
   const {

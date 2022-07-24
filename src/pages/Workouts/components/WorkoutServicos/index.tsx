@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import {
   WorkoutServicoForm,
@@ -6,9 +5,9 @@ import {
   WorkoutServicoOffCanvas,
   WorkoutServicoUserTable,
 } from '..';
+import { BootstrapModal } from '../../../../shared/components/BootstrapModal';
 import { ServicesOffcanvas } from '../../../../shared/components/OffCanvas';
 import { PushNotification } from '../../../../shared/components/PushNotification';
-import { BootstrapModal } from '../../../../shared/components/BootstrapModal';
 import { useWorkoutServicos } from './hooks/useWorkoutServicos';
 
 export function WorkoutServicos() {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navbar } from 'react-bootstrap';
 import { BsClock } from 'react-icons/bs';
 import { getDateCalendarHour } from '../../utils/date';

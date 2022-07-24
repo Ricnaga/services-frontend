@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { MouseEventHandler, ReactNode } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 
 function LoadingButton() {
@@ -35,7 +35,7 @@ type ButtonBootstrapProps = {
   type?: 'submit' | 'reset' | 'button';
   title: ReactNode | JSX.Element;
   variant?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 export function ButtonBootstrap({

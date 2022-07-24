@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Tab, Tabs } from 'react-bootstrap';
 import { WorkoutEstatistica, WorkoutServicos } from './components';
 import { useWorkouts } from './hooks/useWorkouts';

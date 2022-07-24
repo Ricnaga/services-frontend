@@ -1,9 +1,8 @@
-import React from 'react';
 import { Field, Form as FormFormik, Formik } from 'formik';
 import { Button, ButtonGroup, ButtonToolbar, Card } from 'react-bootstrap';
 import { GetUsersParamsItems } from '../../../../../application/api/endpoints/users';
-import { LoadingCard } from '../../../../../shared/components/LoadingCard/LoadingCard';
 import { FieldText } from '../../../../../shared/components/Input/FieldText';
+import { LoadingCard } from '../../../../../shared/components/LoadingCard/LoadingCard';
 import { useUpdateUserOffcanvas } from './hooks/useUpdateUserOffcanvas';
 
 export type UpdateUserOffcanvasProps = {

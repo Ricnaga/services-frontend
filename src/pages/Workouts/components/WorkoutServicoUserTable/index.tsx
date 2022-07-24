@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table } from 'react-bootstrap';
 import { BsTools as ChangeIcon } from 'react-icons/bs';
 import { GetUsersParamsItems } from '../../../../application/api/endpoints/users';

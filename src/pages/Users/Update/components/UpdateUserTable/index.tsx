@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import {
   BsFillTrashFill as TrashIcon,
