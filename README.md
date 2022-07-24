@@ -13,7 +13,7 @@
 #### - React router dom: roteamento de páginas
 #### - Typescript: Tipagens
 #### - React-Boostrap: Componentes personalizados
-#### - Miragejs: mock de Api
+#### - MSW: mock de Api
 #### - Axios: obtendo dados da Api mockada
 
 ## <div align="center"> Sumário </div>
@@ -49,7 +49,7 @@ $ yarn start (caso não utilize o yarn: npm run start)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Reactjs](https://pt-br.reactjs.org/)
 - [React-bootstrap](https://react-bootstrap.github.io/)
-- [Miragejs](https://miragejs.com/)
+- [Mock Service Worker](https://mswjs.io/)
 - [Axios](https://axios-http.com/docs/intro)
 
 

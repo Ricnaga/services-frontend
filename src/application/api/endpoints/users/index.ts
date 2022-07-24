@@ -43,7 +43,7 @@ type GetUsersParams = Record<'users', Array<GetUsersParamsItems>>;
 
 export const getUsers = async (
   params: Omit<GetUsersParamsItems, 'created_at'>,
-) => api.get<GetUsersParams>(USERS, { params }).then(({ data }) => data);
+) => api.get<GetUsersParams>(USERS, { params }).then(({ data }) => data.users);
 
 export const patchUsersById = async (
   id: string,

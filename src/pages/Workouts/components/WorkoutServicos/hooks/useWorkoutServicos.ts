@@ -85,7 +85,7 @@ export const useWorkoutServicos = () => {
     await getUsers(values)
       .then((response) => {
         onStopLoading();
-        setUsers(response.users);
+        setUsers(response);
       })
       .catch(() => {
         onStopLoading();

@@ -53,7 +53,7 @@ export const useUpdateUsers = () => {
     onStartLoading();
     await getUsers(values).then((response) => {
       onStopLoading();
-      setUsers(response.users);
+      setUsers(response);
     });
   };
 
