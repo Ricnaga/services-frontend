@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { LiveClock } from './clock';
+import { BsClock } from 'react-icons/bs';
+import { getDateCalendarHour } from '../../utils/date';
 
 export function Topbar() {
+  const [clock, setClock] = useState<string | null>(getDateCalendarHour());
+
+  useEffect(() => {
+    setInterval(() => {
+      setClock(null);
+      setClock(getDateCalendarHour());
+    }, 30000);
+  }, [clock]);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -16,7 +26,10 @@ export function Topbar() {
             </NavDropdown>
           </Nav>
           <Nav variant="pills">
-            <LiveClock />
+            <Navbar.Text>
+              <BsClock className="mx-2" />
+              {clock}
+            </Navbar.Text>
             <Nav.Link href="/Ticket">Catraca</Nav.Link>
           </Nav>
         </Navbar.Collapse>

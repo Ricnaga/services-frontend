@@ -1,12 +1,12 @@
 import { Card, Container } from 'react-bootstrap';
-import { PushNotification } from '../../shared/components/PushNotification';
+import { BootstrapToast } from '../../shared/components/BootstrapToast';
 import { CreateUserForm } from './components/CreateUserForm';
 import { useCreateUsers } from './hooks/useCreateUsers';
 
 export function CreateUsers() {
   const {
-    data: { pacotes, color, isOpenPushNotification, title },
-    functions: { onOpenPushNotification, onClosePushNotification },
+    data: { pacotes, color, isOpenBootstrapToast, title },
+    functions: { onOpenBootstrapToast, onCloseBootstrapToast },
   } = useCreateUsers();
 
   return (
@@ -16,15 +16,15 @@ export function CreateUsers() {
           <Card.Title as="h1">Cadastro de cliente</Card.Title>
           <CreateUserForm
             pacotes={pacotes}
-            onPushNotification={onOpenPushNotification}
+            onBootstrapToast={onOpenBootstrapToast}
           />
         </Card.Body>
       </Card>
-      <PushNotification
+      <BootstrapToast
         color={color}
         title={title}
-        isOpen={isOpenPushNotification}
-        onClose={onClosePushNotification}
+        isOpen={isOpenBootstrapToast}
+        onClose={onCloseBootstrapToast}
       />
     </Container>
   );

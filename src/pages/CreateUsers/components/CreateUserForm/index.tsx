@@ -4,19 +4,19 @@ import { GetPlansItems } from '../../../../application/api/endpoints/plans';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
 import { FieldCheckbox } from '../../../../shared/components/Input/FieldCheckbox';
 import { FieldText } from '../../../../shared/components/Input/FieldText';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 import { useCreateUserForm } from './hooks/useCreateUserForm';
 
 type FormCardProps = {
   pacotes: GetPlansItems[];
-  onPushNotification: (newTitle: string, color?: 'success' | 'danger') => void;
+  onBootstrapToast: (newTitle: string, color?: 'success' | 'danger') => void;
 };
 
-export function CreateUserForm({ pacotes, onPushNotification }: FormCardProps) {
+export function CreateUserForm({ pacotes, onBootstrapToast }: FormCardProps) {
   const {
     data: { initialValues, loading, CreateUserFormEnum },
     functions: { onSubmit },
-  } = useCreateUserForm({ onPushNotification, pacotes });
+  } = useCreateUserForm({ onBootstrapToast, pacotes });
 
   if (!pacotes.length) return <LoadingCard />;
 

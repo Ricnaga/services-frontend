@@ -4,7 +4,7 @@ import { postUser } from '../../../../../application/api/endpoints/users';
 
 type UseCreateUserFormProps = {
   pacotes: GetPlansItems[];
-  onPushNotification: (newTitle: string, color?: 'success' | 'danger') => void;
+  onBootstrapToast: (newTitle: string, color?: 'success' | 'danger') => void;
 };
 
 type OnSubmitValues = {
@@ -16,7 +16,7 @@ type OnSubmitValues = {
 };
 
 export const useCreateUserForm = ({
-  onPushNotification,
+  onBootstrapToast,
   pacotes,
 }: UseCreateUserFormProps) => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,11 +54,11 @@ export const useCreateUserForm = ({
     })
       .then(() => {
         setLoading(false);
-        onPushNotification('Cadastro realizado com sucesso');
+        onBootstrapToast('Cadastro realizado com sucesso');
       })
       .catch(() => {
         setLoading(false);
-        onPushNotification('Não foi possível realizar o cadastro', 'danger');
+        onBootstrapToast('Não foi possível realizar o cadastro', 'danger');
       });
   };
 

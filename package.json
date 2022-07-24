@@ -27,7 +27,8 @@
     "precommit": "lint-staged",
     "build": "react-scripts build",
     "test": "jest",
-    "test:watch": "jest --watch",
+    "test:watch": "yarn test --watch",
+    "test:snap": " yarn test -u",
     "eject": "react-scripts eject"
   },
   "browserslist": {

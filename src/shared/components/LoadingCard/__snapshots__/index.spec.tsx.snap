@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LOADING CARD COMPONENT should be able to render component 1`] = `
+<div>
+  <div
+    class="w-100 mx-auto card"
+  >
+    <div
+      class="card-body"
+    >
+      <div
+        class="placeholder-glow card-title h5"
+      >
+        <span
+          class="w-100 mx-auto my-2 placeholder"
+        />
+      </div>
+      <p
+        class="placeholder-glow card-text"
+      >
+        <span
+          class="w-100 my-2 placeholder"
+        />
+        <span
+          class="w-100 my-2 placeholder"
+        />
+        <span
+          class="w-100 my-2 placeholder"
+        />
+        <span
+          class="w-100 my-2 placeholder"
+        />
+      </p>
+      <div
+        class="placeholder-glow card-footer"
+      >
+        <span
+          class="w-100 my-2 placeholder"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

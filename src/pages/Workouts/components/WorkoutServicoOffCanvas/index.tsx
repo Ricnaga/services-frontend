@@ -12,7 +12,7 @@ import { GetPlansItems } from '../../../../application/api/endpoints/plans';
 import { GetUserPlansByIdItems } from '../../../../application/api/endpoints/usersPlans';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
 import { FieldCheckbox } from '../../../../shared/components/Input/FieldCheckbox';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 import {
   useWorkoutServicoOffCanvas,
   UseWorkoutServicoOffCanvasOnSubmit,

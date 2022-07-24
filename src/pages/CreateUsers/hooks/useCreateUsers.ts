@@ -7,32 +7,32 @@ import {
 type ToastProps = {
   title: string;
   color: 'success' | 'danger';
-  isOpenPushNotification: boolean;
+  isOpenBootstrapToast: boolean;
 };
 
 export const useCreateUsers = () => {
   const [pacotes, setPacotes] = useState<Array<GetPlansItems>>([]);
-  const [{ color, isOpenPushNotification, title }, setToast] =
+  const [{ color, isOpenBootstrapToast, title }, setToast] =
     useState<ToastProps>({
       color: 'success',
-      isOpenPushNotification: false,
+      isOpenBootstrapToast: false,
       title: '',
     });
 
-  const onOpenPushNotification = (
+  const onOpenBootstrapToast = (
     title: string,
     color: 'success' | 'danger' = 'success',
-  ) => setToast({ color, isOpenPushNotification: true, title });
+  ) => setToast({ color, isOpenBootstrapToast: true, title });
 
-  const onClosePushNotification = () =>
-    setToast({ isOpenPushNotification: false, title: '', color: 'success' });
+  const onCloseBootstrapToast = () =>
+    setToast({ isOpenBootstrapToast: false, title: '', color: 'success' });
 
   useEffect(() => {
     getPlans().then((response) => setPacotes(response));
   }, []);
 
   return {
-    data: { pacotes, color, title, isOpenPushNotification },
-    functions: { onOpenPushNotification, onClosePushNotification },
+    data: { pacotes, color, title, isOpenBootstrapToast },
+    functions: { onOpenBootstrapToast, onCloseBootstrapToast },
   };
 };

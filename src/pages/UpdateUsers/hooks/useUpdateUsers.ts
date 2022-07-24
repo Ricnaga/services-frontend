@@ -16,7 +16,7 @@ export type UpdateUserFormOnFindUser = {
 type ToastProps = {
   title: string;
   color: 'success' | 'danger';
-  isOpenPushNotification: boolean;
+  isOpenBootstrapToast: boolean;
 };
 
 export const useUpdateUsers = () => {
@@ -27,10 +27,10 @@ export const useUpdateUsers = () => {
   const [isOpenOffCanvasModal, setIsOpenOffCanvasModal] =
     useState<boolean>(false);
 
-  const [{ color, isOpenPushNotification, title }, setToast] =
+  const [{ color, isOpenBootstrapToast, title }, setToast] =
     useState<ToastProps>({
       color: 'success',
-      isOpenPushNotification: false,
+      isOpenBootstrapToast: false,
       title: '',
     });
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState<boolean>(false);
@@ -41,13 +41,13 @@ export const useUpdateUsers = () => {
   const onStartLoading = () => setLoading(true);
   const onStopLoading = () => setLoading(false);
 
-  const onOpenPushNotification = (
+  const onOpenBootstrapToast = (
     title: string,
     color: 'success' | 'danger' = 'success',
-  ) => setToast({ color, isOpenPushNotification: true, title });
+  ) => setToast({ color, isOpenBootstrapToast: true, title });
 
-  const onClosePushNotification = () =>
-    setToast({ isOpenPushNotification: false, title: '', color: 'success' });
+  const onCloseBootstrapToast = () =>
+    setToast({ isOpenBootstrapToast: false, title: '', color: 'success' });
 
   const handleFindUser = async (values: UpdateUserFormOnFindUser) => {
     onStartLoading();
@@ -82,7 +82,7 @@ export const useUpdateUsers = () => {
       user,
       isOpenOffCanvasModal,
       color,
-      isOpenPushNotification,
+      isOpenBootstrapToast,
       title,
       isOpenDeleteModal,
     },
@@ -97,8 +97,8 @@ export const useUpdateUsers = () => {
       handleCloseOffCanvasModal,
       onStartLoading,
       onStopLoading,
-      onOpenPushNotification,
-      onClosePushNotification,
+      onOpenBootstrapToast,
+      onCloseBootstrapToast,
       onCloseDeleteModal,
       handleOpenDeleteModal,
     },

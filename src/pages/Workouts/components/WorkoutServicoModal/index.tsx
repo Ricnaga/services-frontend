@@ -1,13 +1,13 @@
 import { Modal } from 'react-bootstrap';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 import { useWorkoutServicoModal } from './hooks/useWorkoutServicoModal';
 
 export type WorkoutServicoModalProps = {
   userId: string | null;
   planosUsuario: Array<string> | null;
   onConfirmationModalClose: () => void;
-  onOpenPushNotification: (title: string, color?: 'success' | 'danger') => void;
+  onOpenBootstrapToast: (title: string, color?: 'success' | 'danger') => void;
   onCloseOffCanvas: () => void;
 };
 
@@ -16,7 +16,7 @@ export function WorkoutServicoModal({
   planosUsuario,
   onConfirmationModalClose,
   onCloseOffCanvas,
-  onOpenPushNotification,
+  onOpenBootstrapToast,
 }: WorkoutServicoModalProps) {
   const {
     data: { loading },
@@ -24,7 +24,7 @@ export function WorkoutServicoModal({
   } = useWorkoutServicoModal({
     onCloseOffCanvas,
     onConfirmationModalClose,
-    onOpenPushNotification,
+    onOpenBootstrapToast,
     planosUsuario,
     userId,
   });

@@ -4,7 +4,7 @@ import {
   patchUsersById,
 } from '../../../../application/api/endpoints/users';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 
 type UpdateUserOffcanvasModalPRops = {
   loading: boolean;
@@ -12,7 +12,7 @@ type UpdateUserOffcanvasModalPRops = {
   onStartLoading: () => void;
   onStopLoading: () => void;
   onCloseOffCanvas: () => void;
-  onOpenPushNotification: (title: string, color?: 'success' | 'danger') => void;
+  onOpenBootstrapToast: (title: string, color?: 'success' | 'danger') => void;
   user: GetUsersParamsItems | null;
 };
 
@@ -22,7 +22,7 @@ export function UpdateUserOffCanvasModal({
   onStartLoading,
   onStopLoading,
   onCloseOffCanvas,
-  onOpenPushNotification,
+  onOpenBootstrapToast,
   user,
 }: UpdateUserOffcanvasModalPRops) {
   if (!user) return <LoadingCard />;
@@ -35,12 +35,12 @@ export function UpdateUserOffCanvasModal({
       .then(({ message }) => {
         onCloseOffCanvasModal();
         onCloseOffCanvas();
-        onOpenPushNotification(message);
+        onOpenBootstrapToast(message);
         onStopLoading();
       })
       .catch(() => {
         onStopLoading();
-        onOpenPushNotification(
+        onOpenBootstrapToast(
           'Erro ao atualizar dados do usuário, tente novamente',
           'danger',
         );

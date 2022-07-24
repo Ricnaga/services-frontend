@@ -4,7 +4,7 @@ import {
   GetUsersParamsItems,
 } from '../../../../application/api/endpoints/users';
 import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 
 type UpdateUserDeleteModalProps = {
   user: GetUsersParamsItems | null;
@@ -12,7 +12,7 @@ type UpdateUserDeleteModalProps = {
   onCloseDeleteModal: () => void;
   onStartLoading: () => void;
   onStopLoading: () => void;
-  onOpenPushNotification: (title: string, color?: 'success' | 'danger') => void;
+  onOpenBootstrapToast: (title: string, color?: 'success' | 'danger') => void;
 };
 
 export function UpdateUserDeleteModal({
@@ -21,7 +21,7 @@ export function UpdateUserDeleteModal({
   onStartLoading,
   onStopLoading,
   loading,
-  onOpenPushNotification,
+  onOpenBootstrapToast,
 }: UpdateUserDeleteModalProps) {
   if (!user) return <LoadingCard />;
 
@@ -29,13 +29,13 @@ export function UpdateUserDeleteModal({
     onStartLoading();
     await deleteUserById(user.id)
       .then(({ message }) => {
-        onOpenPushNotification(message);
+        onOpenBootstrapToast(message);
         onCloseDeleteModal();
         onStopLoading();
       })
       .catch(() => {
         onStopLoading();
-        onOpenPushNotification(
+        onOpenBootstrapToast(
           'Erro ao atualizar dados do usuário, tente novamente',
           'danger',
         );

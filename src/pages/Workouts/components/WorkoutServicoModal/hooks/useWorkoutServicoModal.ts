@@ -5,7 +5,7 @@ import { putUserPlansById } from '../../../../../application/api/endpoints/users
 export const useWorkoutServicoModal = ({
   onCloseOffCanvas,
   onConfirmationModalClose,
-  onOpenPushNotification,
+  onOpenBootstrapToast,
   userId,
   planosUsuario,
 }: WorkoutServicoModalProps) => {
@@ -21,13 +21,13 @@ export const useWorkoutServicoModal = ({
           onCloseOffCanvas();
           onConfirmationModalClose();
           onStopLoading();
-          onOpenPushNotification('Serviço alterado com sucesso!');
+          onOpenBootstrapToast('Serviço alterado com sucesso!');
         })
         .catch(() => {
           onCloseOffCanvas();
           onConfirmationModalClose();
           onStopLoading();
-          onOpenPushNotification(
+          onOpenBootstrapToast(
             'Não foi possível atualizar serviço desse cliente, tente novamente',
             'danger',
           );

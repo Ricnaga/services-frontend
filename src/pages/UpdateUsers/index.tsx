@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import { BootstrapModal } from '../../shared/components/BootstrapModal';
 import { ServicesOffcanvas } from '../../shared/components/OffCanvas';
-import { PushNotification } from '../../shared/components/PushNotification';
+import { BootstrapToast } from '../../shared/components/BootstrapToast';
 import {
   UpdateUserDeleteModal,
   UpdateUserForm,
@@ -20,7 +20,7 @@ export function UpdateUsers() {
       user,
       isOpenOffCanvasModal,
       color,
-      isOpenPushNotification,
+      isOpenBootstrapToast,
       title,
       isOpenDeleteModal,
     },
@@ -33,8 +33,8 @@ export function UpdateUsers() {
       handleCloseOffCanvasModal,
       onStartLoading,
       onStopLoading,
-      onOpenPushNotification,
-      onClosePushNotification,
+      onOpenBootstrapToast,
+      onCloseBootstrapToast,
       onCloseDeleteModal,
       handleOpenDeleteModal,
     },
@@ -85,7 +85,7 @@ export function UpdateUsers() {
           onStartLoading={onStartLoading}
           onStopLoading={onStopLoading}
           onCloseOffCanvas={handleCloseOffCanvas}
-          onOpenPushNotification={onOpenPushNotification}
+          onOpenBootstrapToast={onOpenBootstrapToast}
         />
       </BootstrapModal>
       <BootstrapModal
@@ -97,16 +97,16 @@ export function UpdateUsers() {
           user={user}
           loading={loading}
           onCloseDeleteModal={onCloseDeleteModal}
-          onOpenPushNotification={onOpenPushNotification}
+          onOpenBootstrapToast={onOpenBootstrapToast}
           onStartLoading={onStartLoading}
           onStopLoading={onStopLoading}
         />
       </BootstrapModal>
-      <PushNotification
+      <BootstrapToast
         color={color}
         title={title}
-        isOpen={isOpenPushNotification}
-        onClose={onClosePushNotification}
+        isOpen={isOpenBootstrapToast}
+        onClose={onCloseBootstrapToast}
       />
     </Container>
   );

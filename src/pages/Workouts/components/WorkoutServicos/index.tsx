@@ -7,14 +7,14 @@ import {
 } from '..';
 import { BootstrapModal } from '../../../../shared/components/BootstrapModal';
 import { ServicesOffcanvas } from '../../../../shared/components/OffCanvas';
-import { PushNotification } from '../../../../shared/components/PushNotification';
+import { BootstrapToast } from '../../../../shared/components/BootstrapToast';
 import { useWorkoutServicos } from './hooks/useWorkoutServicos';
 
 export function WorkoutServicos() {
   const {
     data: {
       color,
-      isOpenPushNotification,
+      isOpenBootstrapToast,
       title,
       loading,
       users,
@@ -28,8 +28,8 @@ export function WorkoutServicos() {
     },
     functions: {
       handleFindUser,
-      onOpenPushNotification,
-      onClosePushNotification,
+      onOpenBootstrapToast,
+      onCloseBootstrapToast,
       onOpenOffCanvas,
       onCloseOffCanvas,
       handleChangeService,
@@ -85,15 +85,15 @@ export function WorkoutServicos() {
           planosUsuario={planosUsuario}
           userId={userId}
           onCloseOffCanvas={onCloseOffCanvas}
-          onOpenPushNotification={onOpenPushNotification}
+          onOpenBootstrapToast={onOpenBootstrapToast}
           onConfirmationModalClose={onCloseDecisionModal}
         />
       </BootstrapModal>
-      <PushNotification
+      <BootstrapToast
         color={color}
         title={title}
-        isOpen={isOpenPushNotification}
-        onClose={onClosePushNotification}
+        isOpen={isOpenBootstrapToast}
+        onClose={onCloseBootstrapToast}
       />
     </Container>
   );

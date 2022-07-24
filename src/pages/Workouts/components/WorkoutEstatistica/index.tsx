@@ -1,6 +1,6 @@
 import { Card, Container, Table } from 'react-bootstrap';
 import { GetPlansStatistics } from '../../../../application/api/endpoints/plans';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 
 export type WorkoutEstatisticaProps = {
   estatistica: GetPlansStatistics | null;

@@ -1,5 +1,5 @@
 import { Carousel, Image } from 'react-bootstrap';
-import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
+import { LoadingCard } from '../../../../shared/components/LoadingCard';
 
 type HomeCarouselProps = Record<
   'images',

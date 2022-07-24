@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CREATE USERS SCREEN should be able to render screen 1`] = `
+<div>
+  <div
+    class="mt-4 d-flex justify-content-center container"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-body"
+      >
+        <h1
+          class="card-title"
+        >
+          Cadastro de cliente
+        </h1>
+        <div
+          class="w-100 mx-auto card"
+        >
+          <div
+            class="card-body"
+          >
+            <div
+              class="placeholder-glow card-title h5"
+            >
+              <span
+                class="w-100 mx-auto my-2 placeholder"
+              />
+            </div>
+            <p
+              class="placeholder-glow card-text"
+            >
+              <span
+                class="w-100 my-2 placeholder"
+              />
+              <span
+                class="w-100 my-2 placeholder"
+              />
+              <span
+                class="w-100 my-2 placeholder"
+              />
+              <span
+                class="w-100 my-2 placeholder"
+              />
+            </p>
+            <div
+              class="placeholder-glow card-footer"
+            >
+              <span
+                class="w-100 my-2 placeholder"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="toast-container position-absolute bottom-0 start-0 p-3"
+    />
+  </div>
+</div>
+`;
