@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { GetPlansItems } from '../../../../../../application/api/endpoints/plans';
-import { postUser } from '../../../../../../application/api/endpoints/users';
+import { GetPlansItems } from '../../../../../application/api/endpoints/plans';
+import { postUser } from '../../../../../application/api/endpoints/users';
 
 type UseCreateUserFormProps = {
   pacotes: GetPlansItems[];

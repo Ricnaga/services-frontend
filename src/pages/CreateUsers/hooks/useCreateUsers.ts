@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   getPlans,
   GetPlansItems,
-} from '../../../../application/api/endpoints/plans';
+} from '../../../application/api/endpoints/plans';
 
 type ToastProps = {
   title: string;

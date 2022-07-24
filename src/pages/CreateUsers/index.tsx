@@ -1,5 +1,5 @@
 import { Card, Container } from 'react-bootstrap';
-import { PushNotification } from '../../../shared/components/PushNotification';
+import { PushNotification } from '../../shared/components/PushNotification';
 import { CreateUserForm } from './components/CreateUserForm';
 import { useCreateUsers } from './hooks/useCreateUsers';
 

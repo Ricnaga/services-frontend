@@ -1,10 +1,10 @@
 import { Form as FormFormik, Formik } from 'formik';
 import { Card, Col, Form, ListGroup, Row } from 'react-bootstrap';
-import { GetPlansItems } from '../../../../../application/api/endpoints/plans';
-import { ButtonBootstrap } from '../../../../../shared/components/ButtonBootstrap';
-import { FieldCheckbox } from '../../../../../shared/components/Input/FieldCheckbox';
-import { FieldText } from '../../../../../shared/components/Input/FieldText';
-import { LoadingCard } from '../../../../../shared/components/LoadingCard/LoadingCard';
+import { GetPlansItems } from '../../../../application/api/endpoints/plans';
+import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
+import { FieldCheckbox } from '../../../../shared/components/Input/FieldCheckbox';
+import { FieldText } from '../../../../shared/components/Input/FieldText';
+import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
 import { useCreateUserForm } from './hooks/useCreateUserForm';
 
 type FormCardProps = {

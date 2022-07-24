@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   getUsers,
   GetUsersParamsItems,
-} from '../../../../application/api/endpoints/users';
+} from '../../../application/api/endpoints/users';
 
 export type UpdateUserFormOnFindUser = {
   id: string;

@@ -3,7 +3,7 @@ import {
   BsFillTrashFill as TrashIcon,
   BsTools as ChangeIcon,
 } from 'react-icons/bs';
-import { GetUsersParamsItems } from '../../../../../application/api/endpoints/users';
+import { GetUsersParamsItems } from '../../../../application/api/endpoints/users';
 
 interface UsersTableProps {
   onOpenOffCanvas: (usuario: GetUsersParamsItems) => void;

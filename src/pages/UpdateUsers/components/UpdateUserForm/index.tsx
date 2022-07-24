@@ -1,7 +1,7 @@
 import { Field, Form as FormFormik, Formik } from 'formik';
 import { Card } from 'react-bootstrap';
-import { ButtonBootstrap } from '../../../../../shared/components/ButtonBootstrap';
-import { FieldText } from '../../../../../shared/components/Input/FieldText';
+import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
+import { FieldText } from '../../../../shared/components/Input/FieldText';
 import { UpdateUserFormOnFindUser } from '../../hooks/useUpdateUsers';
 import { useUpdateUserForm } from './hooks/useUpdateUserForm';
 

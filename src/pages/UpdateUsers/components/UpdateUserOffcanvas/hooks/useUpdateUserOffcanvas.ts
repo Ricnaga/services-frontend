@@ -1,4 +1,4 @@
-import { GetUsersParamsItems } from '../../../../../../application/api/endpoints/users';
+import { GetUsersParamsItems } from '../../../../../application/api/endpoints/users';
 
 type UseUpdateUserOffcanvasProps = {
   onChangeUser: (values: GetUsersParamsItems) => void;

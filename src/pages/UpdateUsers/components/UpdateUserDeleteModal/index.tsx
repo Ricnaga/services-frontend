@@ -2,9 +2,9 @@ import { Modal } from 'react-bootstrap';
 import {
   deleteUserById,
   GetUsersParamsItems,
-} from '../../../../../application/api/endpoints/users';
-import { ButtonBootstrap } from '../../../../../shared/components/ButtonBootstrap';
-import { LoadingCard } from '../../../../../shared/components/LoadingCard/LoadingCard';
+} from '../../../../application/api/endpoints/users';
+import { ButtonBootstrap } from '../../../../shared/components/ButtonBootstrap';
+import { LoadingCard } from '../../../../shared/components/LoadingCard/LoadingCard';
 
 type UpdateUserDeleteModalProps = {
   user: GetUsersParamsItems | null;
