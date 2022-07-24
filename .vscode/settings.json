@@ -1,4 +1,5 @@
 {
+  "workbench.iconTheme": "material-icon-theme",
   "diffEditor.ignoreTrimWhitespace": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "javascript.suggest.autoImports": true,
@@ -8,7 +9,6 @@
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": true
+    "source.fixAll.eslint": true
   }
 }
