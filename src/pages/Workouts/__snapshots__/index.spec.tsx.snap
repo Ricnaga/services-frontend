@@ -14,11 +14,11 @@ exports[`WORKOUTS SCREEN should be able to render screen 1`] = `
         role="presentation"
       >
         <button
-          aria-controls="react-aria6923794224-1-tabpane-estatistica"
+          aria-controls="react-aria4729857795-1-tabpane-estatistica"
           aria-selected="true"
           class="nav-link active"
           data-rr-ui-event-key="estatistica"
-          id="react-aria6923794224-1-tab-estatistica"
+          id="react-aria4729857795-1-tab-estatistica"
           role="tab"
           type="button"
         >
@@ -30,11 +30,11 @@ exports[`WORKOUTS SCREEN should be able to render screen 1`] = `
         role="presentation"
       >
         <button
-          aria-controls="react-aria6923794224-1-tabpane-alterar"
+          aria-controls="react-aria4729857795-1-tabpane-alterar"
           aria-selected="false"
           class="nav-link"
           data-rr-ui-event-key="alterar"
-          id="react-aria6923794224-1-tab-alterar"
+          id="react-aria4729857795-1-tab-alterar"
           role="tab"
           tabindex="-1"
           type="button"
@@ -47,9 +47,9 @@ exports[`WORKOUTS SCREEN should be able to render screen 1`] = `
       class="tab-content"
     >
       <div
-        aria-labelledby="react-aria6923794224-1-tab-estatistica"
+        aria-labelledby="react-aria4729857795-1-tab-estatistica"
         class="fade tab-pane active show"
-        id="react-aria6923794224-1-tabpane-estatistica"
+        id="react-aria4729857795-1-tabpane-estatistica"
         role="tabpanel"
       >
         <div
@@ -92,9 +92,9 @@ exports[`WORKOUTS SCREEN should be able to render screen 1`] = `
         </div>
       </div>
       <div
-        aria-labelledby="react-aria6923794224-1-tab-alterar"
+        aria-labelledby="react-aria4729857795-1-tab-alterar"
         class="fade tab-pane"
-        id="react-aria6923794224-1-tabpane-alterar"
+        id="react-aria4729857795-1-tabpane-alterar"
         role="tabpanel"
       >
         <div
