@@ -1,5 +1,5 @@
 module.exports = {
-  '*.ts?(x)': ['yarn lint:fix'],
+  '*.ts?(x)': ['yarn lint:fix', 'yarn typecheck'],
   '*.{js,jsx,ts,tsx,json,css}': ['prettier --write'],
   '*.spec.ts?(x)': ['yarn test --bail'],
 };
