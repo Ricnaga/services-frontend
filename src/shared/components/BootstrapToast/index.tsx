@@ -3,7 +3,7 @@ import { delayTime } from './hooks/useToast';
 
 interface BootstrapToastProps {
   color: 'success' | 'danger';
-  title: string;
+  title: string | null;
   onClose: () => void;
   isOpen: boolean;
   delay?: number;

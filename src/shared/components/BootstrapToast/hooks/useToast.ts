@@ -10,36 +10,45 @@ export enum ToastActionType {
 type ToastState = {
   isOpen: boolean;
   title: string | null;
-  color?: 'success' | 'danger';
-  delay?: number;
+  color: 'success' | 'danger';
+  delay: number;
 };
 
 type ToastAction = {
   action: ToastActionType;
-  payload: ToastState;
+  payload: {
+    toastIsOpen?: boolean;
+    toastTitle?: string | null;
+    toastColor?: 'success' | 'danger';
+    toastDelay?: number;
+  };
 };
 
 const openConfig = (
   state: ToastState,
   {
     action,
-    payload: { color = 'success', title, delay = delayTime },
+    payload: {
+      toastColor = 'success',
+      toastTitle = null,
+      toastDelay = delayTime,
+    },
   }: ToastAction,
 ) => {
   switch (action) {
     case ToastActionType.OPEN:
       return {
         isOpen: true,
-        title,
-        color,
-        delay,
+        title: toastTitle,
+        color: toastColor,
+        delay: toastDelay,
       };
     case ToastActionType.CLOSE:
       return {
         isOpen: false,
         title: null,
-        color,
-        delay,
+        color: toastColor,
+        delay: delayTime,
       };
     default:
       return state;
