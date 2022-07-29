@@ -2,15 +2,18 @@ import { Home } from '.';
 import { renderWithTheme } from '../../test/Provider/BootstrapProvider';
 
 describe('HOME SCREEN', () => {
-  it('should render Container', () => {
-    const { container } = renderWithTheme(<Home />);
+  let mockContainer: HTMLElement;
 
-    expect(container.firstChild).toHaveClass('container-fluid mt-4');
+  beforeEach(() => {
+    const { container } = renderWithTheme(<Home />);
+    mockContainer = container;
   });
 
   it('should be able to render screen', () => {
-    const { container } = renderWithTheme(<Home />);
+    expect(mockContainer).toMatchSnapshot();
+  });
 
-    expect(container).toMatchSnapshot();
+  it('should render Container', () => {
+    expect(mockContainer.firstChild).toHaveClass('container-fluid mt-4');
   });
 });

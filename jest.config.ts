@@ -2,7 +2,10 @@ import type { Config } from '@jest/types';
 
 const config: Config.InitialOptions = {
   clearMocks: true,
-  collectCoverageFrom: ['<rootDir>/src/pages/**/*.[jt]s?(x)'],
+  collectCoverageFrom: [
+    '<rootDir>/src/pages/**/*.[jt]s?(x)',
+    '!<rootDir>/src/pages/**/*.{spec,test}.[jt]s?(x)',
+  ],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'json', 'text', 'text-summary'],

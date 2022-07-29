@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "lint": "eslint --ext .ts --ext .tsx src",
     "lint:fix": "yarn lint --fix",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "bash -c tsc --noEmit",
     "prepare": "husky install",
     "precommit": "lint-staged",
     "build": "react-scripts build",

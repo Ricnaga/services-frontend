@@ -17,7 +17,6 @@ type ToastState = {
 type ToastAction = {
   action: ToastActionType;
   payload: {
-    toastIsOpen?: boolean;
     toastTitle?: string | null;
     toastColor?: 'success' | 'danger';
     toastDelay?: number;
@@ -62,8 +61,21 @@ export const useToast = () => {
     color: 'success',
     delay: delayTime,
   });
+
+  const openToast = (
+    toastTitle: string,
+    toastColor: 'success' | 'danger' = 'success',
+  ) =>
+    dispatch({
+      action: ToastActionType.OPEN,
+      payload: { toastColor, toastTitle },
+    });
+
+  const closeToast = () =>
+    dispatch({ action: ToastActionType.CLOSE, payload: {} });
+
   return {
     data: { color, isOpen, title, delay },
-    functions: { toastAsOpen: dispatch },
+    functions: { toastAsOpen: dispatch, openToast, closeToast },
   };
 };
